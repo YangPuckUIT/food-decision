@@ -1,7 +1,16 @@
+require("dotenv").config();
+
 const app = require("./app");
+const connectMongoDB = require("./config/mongodb");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+const startServer = async () => {
+    await connectMongoDB();
+
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+};
+
+startServer();
