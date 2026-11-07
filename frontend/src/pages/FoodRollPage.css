@@ -37,3 +37,21 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+.food-roll__button--secondary {
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.food-roll__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.food-roll__message {
+  max-width: 420px;
+  text-align: center;
+}
