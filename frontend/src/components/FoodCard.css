@@ -1,0 +1,41 @@
+/* Màu và font chỉ là tạm, chưa chốt thiết kế */
+
+.food-card {
+  max-width: 280px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden; /* để ảnh cũng bị bo theo góc thẻ */
+  background: #fff;
+}
+
+.food-card__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover; /* ảnh lấp đầy khung, không bị méo */
+}
+
+/* Khung xám thay cho ảnh khi không có hoặc ảnh lỗi */
+.food-card__image--placeholder {
+  background: #ccc;
+}
+
+.food-card__body {
+  padding: 12px;
+}
+
+.food-card__cuisine {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}
+
+.food-card__name {
+  margin: 4px 0;
+  font-size: 18px;
+}
+
+.food-card__price {
+  margin: 0;
+  font-weight: bold;
+}
