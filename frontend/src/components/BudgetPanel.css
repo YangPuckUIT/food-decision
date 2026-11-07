@@ -1,0 +1,74 @@
+/* Lớp phủ toàn màn hình, làm tối nền phía sau */
+.budget-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--color-overlay);
+}
+
+.budget-panel {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: center;
+}
+
+.budget-panel__title {
+  font-size: 1.25rem;
+}
+
+.budget-panel__amount {
+  margin: 12px 0 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.budget-panel__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.budget-panel__range {
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--color-primary);
+}
+
+.budget-panel__presets {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 24px;
+}
+
+.budget-panel__preset,
+.budget-panel__button {
+  flex: 1;
+  min-height: 44px;
+  border: 2px solid var(--color-primary);
+  border-radius: 8px;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+/* Preset đang chọn: tô đậm */
+.budget-panel__preset--active,
+.budget-panel__button--primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 700;
+}
+
+.budget-panel__actions {
+  display: flex;
+  gap: 12px;
+}

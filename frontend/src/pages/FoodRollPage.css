@@ -1,0 +1,57 @@
+/* Màu TẠM — sẽ đổi theo art Procreate.
+   Khai báo ở .food-roll nên BudgetPanel (nằm bên trong) cũng dùng được. */
+.food-roll {
+  --color-bg: #fff8ec;
+  --color-surface: #ffffff;
+  --color-text: #2b2118;
+  --color-primary: #7a3cc2;
+  --color-on-primary: #ffffff;
+  --color-overlay: rgb(0 0 0 / 0.6);
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.food-roll__title {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.food-roll__button {
+  min-width: 160px;
+  min-height: 44px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.food-roll__button--secondary {
+  border: 2px solid var(--color-primary);
+  background: var(--color-surface);
+  color: var(--color-primary);
+}
+
+.food-roll__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.food-roll__message {
+  max-width: 420px;
+  text-align: center;
+}
