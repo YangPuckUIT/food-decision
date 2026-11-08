@@ -77,6 +77,8 @@ function FoodRollPage() {
 
   return (
     <main className="food-roll">
+      <title>Shooting Star Tower · Food Decision</title>
+
       {/* Luôn có trên trang; chỉ đổi chữ bên trong để trình đọc màn hình đọc lên */}
       <p className="visually-hidden" role="status">
         {status === 'rolling' ? 'Calling a shooting star…' : ''}

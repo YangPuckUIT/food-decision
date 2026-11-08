@@ -39,7 +39,44 @@ body {
   border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px;
 }
 
+/* Khung trang đơn giản dùng chung (trang tạm, 404): căn giữa, chiếm phần còn lại dưới header */
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px;
+  text-align: center;
+}
+
+.page__title {
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.page__text {
+  max-width: 480px;
+  font-size: 24px;
+  overflow-wrap: anywhere; /* id dài trong URL không làm tràn ngang */
+}
+
+/* Link trông như nút phụ: viền đứt nét */
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 24px;
+  border: 2.5px dashed var(--color-ink);
+  color: var(--color-ink);
+  font-size: 22px;
+  text-decoration: none;
+}
+
 /* Viền focus rõ khi dùng bàn phím (nút nền mực không thấy viền mặc định) */
+a:focus-visible,
 button:focus-visible,
 input:focus-visible {
   outline: 3px solid var(--color-ink);

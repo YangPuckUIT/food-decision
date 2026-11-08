@@ -1,6 +1,6 @@
 /* Style sketch — bố cục theo .design/gacha-sketch. Màu lấy từ :root trong index.css */
 .food-roll {
-  min-height: 100vh;
+  flex: 1; /* chiếm phần màn hình còn lại dưới header của Layout */
   display: flex;
   flex-direction: column;
   align-items: center;

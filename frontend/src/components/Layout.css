@@ -1,0 +1,69 @@
+/* Layout: header trên cùng, phần còn lại của màn hình dành cho trang */
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 48px;
+}
+
+/* Khung chờ art: viền đứt nét + "boil" như khung ảnh món */
+.layout__logo {
+  width: 220px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2.5px dashed var(--color-muted);
+  /* Nền giấy đặc che đường kẻ ô, để chữ muted luôn đạt tương phản ≥ 4.5:1 */
+  background: var(--color-paper);
+  color: var(--color-muted);
+  font-size: 18px;
+  animation: layout-boil 0.45s steps(1) infinite;
+}
+
+@keyframes layout-boil {
+  0%   { transform: rotate(-0.6deg); }
+  33%  { transform: rotate(0.5deg) translate(0.5px, -0.5px); }
+  66%  { transform: rotate(-0.3deg) translate(-0.5px, 0.5px); }
+  100% { transform: rotate(-0.6deg); }
+}
+
+/* Link về Map: kiểu nút phụ (viền đứt nét) */
+.layout__nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 24px;
+  border: 2.5px dashed var(--color-ink);
+  color: var(--color-ink);
+  font-size: 22px;
+  text-decoration: none;
+}
+
+/* Đang ở trang Map: viền liền */
+.layout__nav-link[aria-current='page'] {
+  border-style: solid;
+}
+
+@media (max-width: 600px) {
+  .layout__header {
+    padding: 16px;
+  }
+
+  .layout__logo {
+    width: 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout__logo {
+    animation: none;
+  }
+}

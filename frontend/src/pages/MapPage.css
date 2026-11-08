@@ -1,0 +1,80 @@
+/* Trang Map (tạm): lưới 4 thẻ địa điểm, style sketch */
+.map {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 16px 16px 48px;
+}
+
+.map__title {
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.map__places {
+  width: 100%;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  list-style: none;
+}
+
+/* Cả thẻ là 1 link: bấm chỗ nào trong thẻ cũng vào được */
+.map__place {
+  height: 100%;
+  min-height: 140px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  background: var(--color-surface);
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-ink);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: transform 0.15s ease-out;
+}
+
+/* Rê chuột / focus: thẻ nhấc lên một chút */
+.map__place:hover,
+.map__place:focus-visible {
+  transform: translate(-2px, -2px);
+}
+
+.map__place-name {
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.map__place-text {
+  font-size: 20px;
+  color: var(--color-muted);
+}
+
+@media (max-width: 600px) {
+  .map__title {
+    font-size: 44px;
+  }
+
+  .map__places {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .map__place {
+    transition: none;
+  }
+
+  .map__place:hover,
+  .map__place:focus-visible {
+    transform: none;
+  }
+}
