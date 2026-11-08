@@ -1,14 +1,6 @@
 import { useState } from 'react'
+import { CATEGORY_LABELS } from '../constants/categories'
 import './FoodCard.css'
-
-// Giá trị category trong data -> nhãn hiển thị
-const CATEGORY_LABELS = {
-  'noodle-soup': 'Noodle Soup',
-  rice: 'Rice',
-  'fast-food': 'Fast Food',
-  'hotpot-grill': 'Hotpot & Grill',
-  'street-snack': 'Street Snack',
-}
 
 function FoodCard({ food }) {
   // true khi ảnh tải bị lỗi (sai đường dẫn, file không tồn tại...)

@@ -23,3 +23,31 @@ export async function getRandomFood(maxPrice) {
   const index = Math.floor(Math.random() * affordable.length)
   return { data: affordable[index] }
 }
+
+// ⚠️ MOCK — GET /api/foods. Sau này thay phần thân bằng:
+//   const res = await fetch('/api/foods')
+//   return res.json()
+// Trả về: { data: [food, ...] } — danh sách rỗng vẫn là 200 + mảng rỗng
+export async function getFoods() {
+  return { data: mockFoods }
+}
+
+// ⚠️ MOCK — GET /api/foods/:id. Sau này thay phần thân bằng:
+//   const res = await fetch(`/api/foods/${encodeURIComponent(id)}`)
+//   return res.json()
+// Trả về: { data: food }
+//   hoặc (API thật trả 404): { error: { code: 'FOOD_NOT_FOUND', message } }
+export async function getFoodById(id) {
+  const food = mockFoods.find((item) => item._id === id)
+
+  if (!food) {
+    return {
+      error: {
+        code: 'FOOD_NOT_FOUND',
+        message: `No food found with id "${id}".`,
+      },
+    }
+  }
+
+  return { data: food }
+}

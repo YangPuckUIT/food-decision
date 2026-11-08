@@ -1,18 +1,161 @@
+import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { getFoodById } from '../api/foods'
+import { CATEGORY_LABELS } from '../constants/categories'
+import './FoodDetailPage.css'
 
-// TẠM: trang chi tiết 1 món trong Codex (/codex/:id)
-function FoodDetailPage() {
-  // useParams đọc phần động của URL: /codex/abc123 -> { id: 'abc123' }
-  const { id } = useParams()
+// Số trong data -> chữ dễ hiểu
+const SPICY_LABELS = { 0: 'not spicy', 1: 'mild', 2: 'hot' }
+const FULLNESS_LABELS = { 1: 'light', 2: 'satisfying', 3: 'very filling' }
+
+// Ảnh món, hoặc khung chờ nếu chưa có ảnh / ảnh lỗi (giống FoodCard)
+function FoodPhoto({ food }) {
+  const [imageError, setImageError] = useState(false)
+
+  if (food.imageUrl && !imageError) {
+    return (
+      <img
+        className="food-detail__image"
+        src={food.imageUrl}
+        alt={food.name}
+        onError={() => setImageError(true)}
+      />
+    )
+  }
 
   return (
-    <main className="page">
-      <title>Codex Entry · Food Decision</title>
-      <h1 className="page__title">Codex Entry</h1>
-      <p className="page__text">Coming soon: details for entry “{id}”.</p>
-      <Link to="/" className="link-button wob2">
-        Back to the map
+    <div className="food-detail__placeholder wob2" role="img" aria-label={food.name}>
+      Food photo
+    </div>
+  )
+}
+
+function FoodDetailPage() {
+  // /codex/mock-food-002 -> id = 'mock-food-002'
+  const { id } = useParams()
+
+  // Kết quả lần tải gần nhất, kèm id đã tải: { id, food } | { id, error }
+  const [result, setResult] = useState(null)
+  const [reloadKey, setReloadKey] = useState(0)
+
+  useEffect(() => {
+    let ignore = false
+
+    async function loadFood() {
+      try {
+        const response = await getFoodById(id)
+        if (!ignore) setResult({ id, ...response })
+      } catch (error) {
+        if (ignore) return
+        console.error(error)
+        setResult({ id, error: { code: 'NETWORK_ERROR' } })
+      }
+    }
+
+    loadFood()
+    return () => {
+      ignore = true
+    }
+  }, [id, reloadKey]) // chạy lại khi id trên URL đổi
+
+  function handleRetry() {
+    setResult(null)
+    setReloadKey((key) => key + 1)
+  }
+
+  // Chưa có kết quả, hoặc kết quả là của id cũ -> đang tải
+  const isLoading = !result || result.id !== id
+  const food = isLoading ? null : result.data
+
+  if (isLoading) {
+    return (
+      <main className="food-detail food-detail--center">
+        <title>Codex Entry · Food Decision</title>
+        <p className="food-detail__message" role="status">
+          Opening the codex…
+        </p>
+      </main>
+    )
+  }
+
+  if (!food) {
+    const notFound = result.error?.code === 'FOOD_NOT_FOUND'
+    return (
+      <main className="food-detail food-detail--center">
+        <title>{notFound ? 'Not Found · Food Decision' : 'Codex Entry · Food Decision'}</title>
+        <h1 className="food-detail__state-title">
+          {notFound ? "This creature isn't in the codex" : "Can't reach the library"}
+        </h1>
+        {!notFound && (
+          <button
+            type="button"
+            className="food-detail__button wob"
+            onClick={handleRetry}
+          >
+            Try again
+          </button>
+        )}
+        <Link to="/codex" className="link-button wob2">
+          Back to the codex
+        </Link>
+      </main>
+    )
+  }
+
+  const facts = [
+    ['Cuisine', food.cuisine],
+    ['Meals', food.meal?.join(', ')],
+    ['Calories', food.calories != null && `${food.calories} kcal`],
+    ['Spicy', SPICY_LABELS[food.spicy]],
+    ['Fullness', FULLNESS_LABELS[food.fullness]],
+  ].filter(([, value]) => value) // bỏ dòng nào chưa có dữ liệu
+
+  return (
+    <main className="food-detail">
+      <title>{`${food.name} · Food Decision`}</title>
+
+      <Link to="/codex" className="link-button wob2 food-detail__back">
+        Back to the codex
       </Link>
+
+      <article className="food-detail__entry">
+        <div className="food-detail__photo">
+          {/* key: đổi món thì FoodPhoto tạo mới -> reset trạng thái ảnh lỗi */}
+          <FoodPhoto key={food._id} food={food} />
+        </div>
+
+        <div className="food-detail__info">
+          {CATEGORY_LABELS[food.category] && (
+            <p className="food-detail__category">
+              {CATEGORY_LABELS[food.category]}
+            </p>
+          )}
+          <h1 className="food-detail__name">{food.name}</h1>
+          <p className="food-detail__price">
+            {food.price.toLocaleString('en-US') + '₫'}
+          </p>
+          <p className="food-detail__description">{food.description}</p>
+
+          <dl className="food-detail__facts">
+            {facts.map(([label, value]) => (
+              <div key={label} className="food-detail__fact">
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {food.tags?.length > 0 && (
+            <ul className="food-detail__tags" aria-label="Tags">
+              {food.tags.map((tag) => (
+                <li key={tag} className="food-detail__tag wob2">
+                  #{tag}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </article>
     </main>
   )
 }
