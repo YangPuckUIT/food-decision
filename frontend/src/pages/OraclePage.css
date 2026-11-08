@@ -1,0 +1,255 @@
+/* Oracle's Tent — style sketch */
+.oracle {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.oracle__title {
+  font-size: 56px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: center;
+}
+
+/* ---------- Form ---------- */
+.oracle__form {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.oracle__intro {
+  align-self: center;
+  padding: 0 8px;
+  background: var(--color-paper); /* che đường kẻ ô sau chữ */
+  font-size: 22px;
+  text-align: center;
+}
+
+/* Mỗi câu hỏi là 1 khung giấy */
+.oracle__question {
+  min-width: 0; /* fieldset mặc định không co lại -> tràn ngang trên điện thoại */
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--color-surface);
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+
+/* legend mặc định nằm đè lên viền -> float để nó nằm trong khung như tiêu đề */
+.oracle__legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 4px;
+  padding: 0;
+  font-size: 26px;
+}
+
+.oracle__label,
+.oracle__hint {
+  font-size: 19px;
+  color: var(--color-muted);
+}
+
+.oracle__amount {
+  font-size: 44px;
+  line-height: 1;
+  text-align: center;
+}
+
+.oracle__range {
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--color-ink);
+}
+
+/* Nút bật/tắt category */
+.oracle__chips,
+.oracle__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.oracle__chip {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 2.5px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  font-family: inherit;
+  font-size: 19px;
+  cursor: pointer;
+}
+
+.oracle__chip--on {
+  background: var(--color-ink);
+  color: var(--color-surface);
+}
+
+/* Lựa chọn radio: cả nhãn bấm được, cao ≥ 44px */
+.oracle__option {
+  flex: 1 1 160px;
+  min-height: 48px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2.5px dashed var(--color-ink);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Đang chọn: viền liền (không cần JS, dùng :has) */
+.oracle__option:has(input:checked) {
+  border-style: solid;
+  background: var(--color-note);
+}
+
+.oracle__option input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--color-ink);
+}
+
+/* Viền focus của radio hiện quanh cả nhãn */
+.oracle__option:has(input:focus-visible) {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+.oracle__option input:focus-visible {
+  outline: none;
+}
+
+/* ---------- Nút chính ---------- */
+.oracle__button {
+  align-self: center;
+  min-height: 56px;
+  padding: 0 36px;
+  border: 3px solid var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-family: inherit;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* ---------- Loading / kết quả / lỗi ---------- */
+.oracle__message {
+  padding: 0 8px;
+  background: var(--color-paper);
+  font-size: 24px;
+  text-align: center;
+}
+
+.oracle__state {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.oracle__state-title {
+  max-width: 760px;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* Tiêu đề nhận focus bằng code (tabIndex -1), không cần viền */
+.oracle__state-title:focus {
+  outline: none;
+}
+
+.oracle__results {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.oracle__result {
+  width: 360px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.oracle__card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.15s ease-out;
+}
+
+.oracle__card-link:hover,
+.oracle__card-link:focus-visible {
+  transform: translate(-2px, -2px);
+}
+
+.oracle__score {
+  align-self: center;
+  padding: 2px 14px;
+  background: var(--color-note);
+  border: 2px solid var(--color-ink);
+  font-size: 24px;
+}
+
+.oracle__score-label {
+  font-size: 18px;
+}
+
+.oracle__reasons {
+  padding: 0 8px;
+  background: var(--color-paper);
+  font-size: 19px;
+  line-height: 1.35;
+  list-style: none;
+}
+
+.oracle__reasons li::before {
+  content: '✦ ';
+}
+
+@media (max-width: 600px) {
+  .oracle__title {
+    font-size: 44px;
+  }
+
+  .oracle__question {
+    padding: 16px;
+  }
+
+  .oracle__state-title {
+    font-size: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .oracle__card-link {
+    transition: none;
+  }
+
+  .oracle__card-link:hover,
+  .oracle__card-link:focus-visible {
+    transform: none;
+  }
+}

@@ -11,7 +11,7 @@ function FoodCard({ food }) {
     <article className="food-card wob">
       {/* Khung cố định kích thước; FoodPhoto lấp đầy khung này */}
       <div className="food-card__photo">
-        <FoodPhoto food={food} />
+        <FoodPhoto key={food._id} food={food} />
       </div>
 
       {categoryLabel && (
