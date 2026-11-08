@@ -131,14 +131,108 @@ function findInvalidField(input) {
   if (!input || typeof input !== 'object') return 'body'
   const { budget, categories, spicy, fullness } = input
 
-  if (!Number.isInteger(budget) || budget <= 0) return 'budget'
-  if (
-    !Array.isArray(categories) ||
-    !categories.every((category) => CATEGORIES.includes(category))
-  ) {
-    return 'categories'
-  }
+  if (!isValidBudget(budget)) return 'budget'
+  if (!isValidCategoryList(categories)) return 'categories'
   if (![0, 1, 2].includes(spicy)) return 'spicy'
   if (![1, 2, 3].includes(fullness)) return 'fullness'
+  return null
+}
+
+// --- Kiểm tra dùng chung cho các API nhận input ---
+
+const BUDGET_MIN = 20000
+const BUDGET_MAX = 300000
+
+// Ngân sách: số nguyên 20,000–300,000 (theo spec)
+function isValidBudget(budget) {
+  return Number.isInteger(budget) && budget >= BUDGET_MIN && budget <= BUDGET_MAX
+}
+
+// Mảng, mọi phần tử là 1 trong 5 category hợp lệ (mảng rỗng vẫn hợp lệ)
+function isValidCategoryList(list) {
+  return Array.isArray(list) && list.every((item) => CATEGORIES.includes(item))
+}
+
+// ⚠️ MOCK — POST /api/group-decision. Sau này thay phần thân bằng:
+//   const res = await fetch('/api/group-decision', {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'application/json' },
+//     body: JSON.stringify(input),
+//   })
+//   return res.json()
+// input  = { foodIds, budget, noSpicy, avoidCategories }
+// Trả về: { data: { finalists: [food], eliminated: [{ food, reason }] } }
+//   (giữ thứ tự foodIds ở cả 2 mảng; finalists rỗng vẫn là data)
+//   hoặc  { error: { code: 'INVALID_INPUT', message: 'Invalid input: <field>' } }
+//   hoặc  { error: { code: 'UNKNOWN_FOOD_ID', message } }
+export async function getGroupDecision(input) {
+  const invalidField = findInvalidGroupField(input)
+  if (invalidField) {
+    return {
+      error: {
+        code: 'INVALID_INPUT',
+        message: `Invalid input: ${invalidField}`,
+      },
+    }
+  }
+
+  const { foodIds, budget, noSpicy, avoidCategories } = input
+
+  // Đổi id -> món; có id lạ thì báo lỗi luôn
+  const foods = []
+  for (const id of foodIds) {
+    const food = mockFoods.find((item) => item._id === id)
+    if (!food) {
+      return {
+        error: {
+          code: 'UNKNOWN_FOOD_ID',
+          message: `Unknown food id: ${id}`,
+        },
+      }
+    }
+    foods.push(food)
+  }
+
+  const finalists = []
+  const eliminated = []
+
+  // Xét theo đúng thứ tự foodIds; trúng luật ĐẦU TIÊN thì loại với đúng 1 mã
+  for (const food of foods) {
+    let reason = null
+    if (food.price > budget) {
+      reason = 'OVER_BUDGET'
+    } else if (noSpicy && food.spicy === 2) {
+      reason = 'TOO_SPICY'
+    } else if (avoidCategories.includes(food.category)) {
+      reason = 'AVOIDED_CATEGORY'
+    }
+
+    if (reason) {
+      eliminated.push({ food, reason })
+    } else {
+      finalists.push(food)
+    }
+  }
+
+  return { data: { finalists, eliminated } }
+}
+
+// Thứ tự kiểm tra: foodIds -> budget -> noSpicy -> avoidCategories
+function findInvalidGroupField(input) {
+  if (!input || typeof input !== 'object') return 'body'
+  const { foodIds, budget, noSpicy, avoidCategories } = input
+
+  if (
+    !Array.isArray(foodIds) ||
+    foodIds.length < 2 ||
+    foodIds.length > 12 ||
+    !foodIds.every((id) => typeof id === 'string' && id !== '') ||
+    new Set(foodIds).size !== foodIds.length // có id trùng
+  ) {
+    return 'foodIds'
+  }
+  if (!isValidBudget(budget)) return 'budget'
+  if (typeof noSpicy !== 'boolean') return 'noSpicy'
+  if (!isValidCategoryList(avoidCategories)) return 'avoidCategories'
   return null
 }
