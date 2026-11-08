@@ -13,7 +13,7 @@
   padding: 24px 48px;
 }
 
-/* Khung chờ art: viền đứt nét + "boil" như khung ảnh món */
+/* Khung chờ art: viền đứt nét (rung nhờ class .boil trong index.css) */
 .layout__logo {
   width: 220px;
   height: 52px;
@@ -25,14 +25,6 @@
   background: var(--color-paper);
   color: var(--color-muted);
   font-size: 18px;
-  animation: layout-boil 0.45s steps(1) infinite;
-}
-
-@keyframes layout-boil {
-  0%   { transform: rotate(-0.6deg); }
-  33%  { transform: rotate(0.5deg) translate(0.5px, -0.5px); }
-  66%  { transform: rotate(-0.3deg) translate(-0.5px, 0.5px); }
-  100% { transform: rotate(-0.6deg); }
 }
 
 /* Link về Map: kiểu nút phụ (viền đứt nét) */
@@ -59,11 +51,5 @@
 
   .layout__logo {
     width: 140px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .layout__logo {
-    animation: none;
   }
 }

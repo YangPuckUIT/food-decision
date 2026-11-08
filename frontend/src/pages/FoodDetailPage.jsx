@@ -1,34 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import FoodPhoto from '../components/FoodPhoto'
 import { getFoodById } from '../api/foods'
 import { CATEGORY_LABELS } from '../constants/categories'
+import { formatPrice } from '../utils/formatPrice'
 import './FoodDetailPage.css'
 
 // Số trong data -> chữ dễ hiểu
 const SPICY_LABELS = { 0: 'not spicy', 1: 'mild', 2: 'hot' }
 const FULLNESS_LABELS = { 1: 'light', 2: 'satisfying', 3: 'very filling' }
-
-// Ảnh món, hoặc khung chờ nếu chưa có ảnh / ảnh lỗi (giống FoodCard)
-function FoodPhoto({ food }) {
-  const [imageError, setImageError] = useState(false)
-
-  if (food.imageUrl && !imageError) {
-    return (
-      <img
-        className="food-detail__image"
-        src={food.imageUrl}
-        alt={food.name}
-        onError={() => setImageError(true)}
-      />
-    )
-  }
-
-  return (
-    <div className="food-detail__placeholder wob2" role="img" aria-label={food.name}>
-      Food photo
-    </div>
-  )
-}
 
 function FoodDetailPage() {
   // /codex/mock-food-002 -> id = 'mock-food-002'
@@ -131,9 +111,7 @@ function FoodDetailPage() {
             </p>
           )}
           <h1 className="food-detail__name">{food.name}</h1>
-          <p className="food-detail__price">
-            {food.price.toLocaleString('en-US') + '₫'}
-          </p>
+          <p className="food-detail__price">{formatPrice(food.price)}</p>
           <p className="food-detail__description">{food.description}</p>
 
           <dl className="food-detail__facts">

@@ -1,45 +1,24 @@
-import { useState } from 'react'
+import FoodPhoto from './FoodPhoto'
 import { CATEGORY_LABELS } from '../constants/categories'
+import { formatPrice } from '../utils/formatPrice'
 import './FoodCard.css'
 
 function FoodCard({ food }) {
-  // true khi ảnh tải bị lỗi (sai đường dẫn, file không tồn tại...)
-  const [imageError, setImageError] = useState(false)
-
-  // Chỉ hiện <img> khi có imageUrl VÀ ảnh chưa bị lỗi
-  const showImage = food.imageUrl && !imageError
-
-  // 45000 -> "45,000₫"
-  const formattedPrice = food.price.toLocaleString('en-US') + '₫'
-
   // Category lạ thì hiện nguyên giá trị; không có category thì không hiện
   const categoryLabel = CATEGORY_LABELS[food.category] ?? food.category
 
   return (
     <article className="food-card wob">
-      {showImage ? (
-        <img
-          className="food-card__image"
-          src={food.imageUrl}
-          alt={food.name}
-          onError={() => setImageError(true)}
-        />
-      ) : (
-        // Khung chờ art: thay cho ảnh khi chưa có hoặc ảnh lỗi
-        <div
-          className="food-card__placeholder wob2"
-          role="img"
-          aria-label={food.name}
-        >
-          Food photo
-        </div>
-      )}
+      {/* Khung cố định kích thước; FoodPhoto lấp đầy khung này */}
+      <div className="food-card__photo">
+        <FoodPhoto food={food} />
+      </div>
 
       {categoryLabel && (
         <p className="food-card__category">{categoryLabel}</p>
       )}
       <h3 className="food-card__name">{food.name}</h3>
-      <p className="food-card__price">{formattedPrice}</p>
+      <p className="food-card__price">{formatPrice(food.price)}</p>
     </article>
   )
 }

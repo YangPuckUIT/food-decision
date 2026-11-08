@@ -14,42 +14,12 @@
   box-shadow: 6px 6px 0 var(--color-ink);
 }
 
-/* Ảnh thật (PNG tách nền): 4 bóng trắng lệch 3px về 4 phía = viền sticker,
-   thêm 1 bóng mực lệch chéo. drop-shadow bám theo hình món, không theo khung chữ nhật */
-.food-card__image {
-  display: block;
+/* Khung ảnh: kích thước cố định, FoodPhoto (ảnh hoặc khung chờ) lấp đầy bên trong */
+.food-card__photo {
   width: 300px;
   max-width: 100%;
   height: 190px;
-  object-fit: contain; /* giữ nguyên tỉ lệ, không cắt mất phần món */
-  filter:
-    drop-shadow(3px 0 0 var(--color-surface))
-    drop-shadow(-3px 0 0 var(--color-surface))
-    drop-shadow(0 3px 0 var(--color-surface))
-    drop-shadow(0 -3px 0 var(--color-surface))
-    drop-shadow(4px 4px 0 var(--color-ink));
-}
-
-/* Khung chờ art: viền đứt nét + rung nhẹ ("boil") như nét vẽ tay */
-.food-card__placeholder {
-  width: 300px;
-  max-width: 100%;
-  height: 190px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2.5px dashed var(--color-muted);
-  color: var(--color-muted);
-  font-size: 18px;
-  animation: food-card-boil 0.45s steps(1) infinite;
-}
-
-/* steps(1): nhảy thẳng giữa các khung, không chuyển mượt -> giống hoạt hình vẽ tay */
-@keyframes food-card-boil {
-  0%   { transform: rotate(-0.6deg); }
-  33%  { transform: rotate(0.5deg) translate(0.5px, -0.5px); }
-  66%  { transform: rotate(-0.3deg) translate(-0.5px, 0.5px); }
-  100% { transform: rotate(-0.6deg); }
+  font-size: 18px; /* cỡ chữ "Food photo" */
 }
 
 .food-card__category {
@@ -66,10 +36,4 @@
 
 .food-card__price {
   font-size: 26px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .food-card__placeholder {
-    animation: none;
-  }
 }

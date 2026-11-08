@@ -39,6 +39,25 @@ body {
   border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px;
 }
 
+/* "Boil": rung nét nhẹ như hoạt hình vẽ tay — CHỈ dùng cho khung chờ art.
+   steps(1): nhảy thẳng giữa các khung, không chuyển mượt */
+.boil {
+  animation: boil 0.45s steps(1) infinite;
+}
+
+@keyframes boil {
+  0%   { transform: rotate(-0.6deg); }
+  33%  { transform: rotate(0.5deg) translate(0.5px, -0.5px); }
+  66%  { transform: rotate(-0.3deg) translate(-0.5px, 0.5px); }
+  100% { transform: rotate(-0.6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boil {
+    animation: none;
+  }
+}
+
 /* Khung trang đơn giản dùng chung (trang tạm, 404): căn giữa, chiếm phần còn lại dưới header */
 .page {
   flex: 1;

@@ -3,6 +3,7 @@ import BudgetPanel from '../components/BudgetPanel'
 import FoodCard from '../components/FoodCard'
 import MeteorAnimation from '../components/MeteorAnimation'
 import { getRandomFood } from '../api/foods'
+import { formatPrice } from '../utils/formatPrice'
 import './FoodRollPage.css'
 
 const DEFAULT_BUDGET = 50000
@@ -72,8 +73,7 @@ function FoodRollPage() {
   // Nhờ vậy nút đã mở panel vẫn còn trên trang để trả focus về.
   const screen = status === 'budget' ? cancelTarget : status
 
-  // 50000 -> "50,000₫"
-  const formattedBudget = budget.toLocaleString('en-US') + '₫'
+  const formattedBudget = formatPrice(budget)
 
   return (
     <main className="food-roll">

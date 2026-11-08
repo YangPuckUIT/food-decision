@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { formatPrice } from '../utils/formatPrice'
 import './BudgetPanel.css'
 
 // Giới hạn slider và các mức chọn nhanh (VND)
@@ -6,11 +7,6 @@ const BUDGET_MIN = 20000
 const BUDGET_MAX = 300000
 const BUDGET_STEP = 5000
 const PRESETS = [30000, 50000, 100000, 200000]
-
-// 50000 -> "50,000₫"
-function formatPrice(value) {
-  return value.toLocaleString('en-US') + '₫'
-}
 
 // 50000 -> "50k"
 function formatShort(value) {

@@ -15,7 +15,7 @@ function Layout() {
     <div className="layout">
       <header className="layout__header">
         {/* Khung chờ logo — thay bằng art vẽ tay sau */}
-        <div className="layout__logo wob">Logo</div>
+        <div className="layout__logo wob boil">Logo</div>
 
         <nav aria-label="Main">
           {/* NavLink tự thêm aria-current="page" khi đang ở đúng trang;
