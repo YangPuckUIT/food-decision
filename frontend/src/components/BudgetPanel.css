@@ -9,6 +9,11 @@
   background: var(--color-overlay);
 }
 
+/* Lớp phủ chỉ nhận focus để giữ phím trong panel, không cần viền focus */
+.budget-overlay:focus {
+  outline: none;
+}
+
 .budget-panel {
   width: 100%;
   max-width: 420px;

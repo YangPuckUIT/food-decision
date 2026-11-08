@@ -21,7 +21,7 @@ function prefersReducedMotion() {
 }
 
 function FoodRollPage() {
-  // 'idle' | 'budget' | 'rolling' | 'result' | 'empty' (sau này thêm 'error')
+  // 'idle' | 'budget' | 'rolling' | 'result' | 'empty' | 'error'
   const [status, setStatus] = useState('idle')
 
   // Ngân sách giữ ở đây (component cha), không giữ trong BudgetPanel
@@ -29,6 +29,17 @@ function FoodRollPage() {
 
   // Món vừa roll được; null khi chưa có
   const [food, setFood] = useState(null)
+
+  // Gọi "API"; nếu bị throw (mất mạng, server sập...) thì trả về null
+  // thay vì để lỗi lan ra ngoài -> Promise.all vẫn chờ đủ animation
+  async function fetchRandomFood() {
+    try {
+      return await getRandomFood(budget)
+    } catch (error) {
+      console.error(error)
+      return null
+    }
+  }
 
   // Chạy animation VÀ gọi "API" cùng lúc, chờ cả hai xong mới chuyển trạng thái
   async function rollFood() {
@@ -38,32 +49,42 @@ function FoodRollPage() {
     const animationDone = prefersReducedMotion() ? null : wait(ROLL_DURATION)
 
     // Promise.all chờ mọi phần tử xong; kết quả trả về theo đúng thứ tự mảng
-    const [response] = await Promise.all([
-      getRandomFood(budget),
-      animationDone,
-    ])
+    const [response] = await Promise.all([fetchRandomFood(), animationDone])
 
-    if (response.data) {
+    // ?. : nếu vế trái là null/undefined thì trả undefined thay vì báo lỗi
+    if (response?.data) {
       setFood(response.data)
       setStatus('result')
-    } else if (response.error.code === 'FOOD_NOT_FOUND') {
+    } else if (response?.error?.code === 'FOOD_NOT_FOUND') {
       setFood(null)
       setStatus('empty')
     } else {
-      // Trạng thái 'error' chưa làm: tạm về idle để không kẹt ở 'rolling'
-      console.error(response.error)
-      setStatus('idle')
+      // Bị throw (response = null) hoặc mã lỗi khác
+      if (response) console.error(response.error)
+      setStatus('error')
     }
   }
+
+  // Bấm "Huỷ" trong panel thì quay về đâu
+  const cancelTarget = food ? 'result' : 'idle'
+
+  // Màn hiển thị: khi panel mở, phía sau giữ nguyên màn mà "Huỷ" sẽ quay về.
+  // Nhờ vậy nút đã mở panel vẫn còn trên trang để trả focus về.
+  const screen = status === 'budget' ? cancelTarget : status
 
   const formattedBudget = budget.toLocaleString('vi-VN') + 'đ'
 
   return (
     <main className="food-roll">
-      {/* Đang roll: chỉ có animation, không có nút nào để bấm */}
-      {status === 'rolling' && <MeteorAnimation />}
+      {/* Luôn có trên trang; chỉ đổi chữ bên trong để trình đọc màn hình đọc lên */}
+      <p className="visually-hidden" role="status">
+        {status === 'rolling' ? 'Đang gọi sao băng…' : ''}
+      </p>
 
-      {status === 'result' && (
+      {/* Đang roll: chỉ có animation, không có nút nào để bấm */}
+      {screen === 'rolling' && <MeteorAnimation />}
+
+      {screen === 'result' && (
         <>
           {/* Bọc ngoài để làm hiệu ứng nảy, không cần sửa FoodCard */}
           <div className="food-roll__card">
@@ -88,7 +109,7 @@ function FoodRollPage() {
         </>
       )}
 
-      {status === 'empty' && (
+      {screen === 'empty' && (
         <>
           <h2 className="food-roll__title">Sao băng chưa tìm thấy món nào</h2>
           <p className="food-roll__message">
@@ -104,7 +125,21 @@ function FoodRollPage() {
         </>
       )}
 
-      {(status === 'idle' || status === 'budget') && (
+      {screen === 'error' && (
+        <>
+          <h2 className="food-roll__title">Không kết nối được tới bếp</h2>
+          <p className="food-roll__message">Kiểm tra mạng rồi thử lại.</p>
+          <button
+            type="button"
+            className="food-roll__button"
+            onClick={rollFood}
+          >
+            Roll lại
+          </button>
+        </>
+      )}
+
+      {screen === 'idle' && (
         <>
           <h1 className="food-roll__title">Hôm nay ăn gì?</h1>
           <button
@@ -121,7 +156,7 @@ function FoodRollPage() {
         <BudgetPanel
           budget={budget}
           onChange={setBudget}
-          onCancel={() => setStatus(food ? 'result' : 'idle')}
+          onCancel={() => setStatus(cancelTarget)}
           onConfirm={rollFood}
         />
       )}

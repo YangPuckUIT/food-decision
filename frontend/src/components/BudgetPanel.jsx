@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import './BudgetPanel.css'
 
 // Các mức ngân sách chọn nhanh (VND)
@@ -16,9 +17,56 @@ function formatShort(value) {
 // Component "không giữ state": budget do FoodRollPage giữ,
 // BudgetPanel chỉ hiển thị và báo ngược lên qua các hàm onXxx.
 function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
+  // useRef: "con trỏ" tới phần tử DOM thật, đổi giá trị không làm render lại
+  const panelRef = useRef(null)
+  const rangeRef = useRef(null)
+
+  useEffect(() => {
+    // Lúc panel vừa mở, focus đang ở nút đã mở nó -> nhớ lại
+    const opener = document.activeElement
+    rangeRef.current.focus()
+
+    // Hàm cleanup: React gọi khi panel bị gỡ khỏi màn hình (đóng panel)
+    return () => {
+      // Chỉ trả focus nếu nút đó vẫn còn trên trang
+      if (opener && opener.isConnected) {
+        opener.focus()
+      }
+    }
+  }, []) // [] = chỉ chạy 1 lần khi mở, cleanup 1 lần khi đóng
+
+  function handleKeyDown(event) {
+    if (event.key === 'Escape') {
+      onCancel()
+      return
+    }
+
+    if (event.key !== 'Tab') return
+
+    // Focus trap: Tab ở phần tử cuối -> vòng về đầu, Shift+Tab ở đầu -> về cuối
+    const focusables = Array.from(
+      panelRef.current.querySelectorAll('input, button'),
+    )
+    const first = focusables[0]
+    const last = focusables[focusables.length - 1]
+    // -1 nếu focus đang ở lớp phủ (vd người dùng vừa click ra nền tối)
+    const index = focusables.indexOf(document.activeElement)
+
+    if (event.shiftKey && index <= 0) {
+      event.preventDefault()
+      last.focus()
+    } else if (!event.shiftKey && index === focusables.length - 1) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
+
   return (
-    <div className="budget-overlay">
+    // tabIndex={-1}: click vào nền tối thì focus vẫn nằm trong overlay,
+    // nên phím Tab / Esc vẫn được handleKeyDown bắt
+    <div className="budget-overlay" tabIndex={-1} onKeyDown={handleKeyDown}>
       <section
+        ref={panelRef}
         className="budget-panel"
         role="dialog"
         aria-modal="true"
@@ -34,6 +82,7 @@ function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
           Kéo để chọn mức giá tối đa
         </label>
         <input
+          ref={rangeRef}
           id="budget-range"
           className="budget-panel__range"
           type="range"
