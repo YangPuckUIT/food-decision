@@ -1,13 +1,27 @@
 import { useState } from 'react'
 import BudgetPanel from '../components/BudgetPanel'
 import FoodCard from '../components/FoodCard'
+import MeteorAnimation from '../components/MeteorAnimation'
 import { getRandomFood } from '../api/foods'
 import './FoodRollPage.css'
 
 const DEFAULT_BUDGET = 50000
 
+// Thời gian animation sao băng (3,6s) + một chút đệm
+const ROLL_DURATION = 3700
+
+// Trả về Promise xong sau `ms` mili-giây
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+// true nếu người dùng bật "giảm chuyển động" trong hệ điều hành
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 function FoodRollPage() {
-  // 'idle' | 'budget' | 'result' | 'empty' (sau này thêm 'rolling', 'error')
+  // 'idle' | 'budget' | 'rolling' | 'result' | 'empty' (sau này thêm 'error')
   const [status, setStatus] = useState('idle')
 
   // Ngân sách giữ ở đây (component cha), không giữ trong BudgetPanel
@@ -16,9 +30,18 @@ function FoodRollPage() {
   // Món vừa roll được; null khi chưa có
   const [food, setFood] = useState(null)
 
-  // Gọi "API" random với ngân sách hiện tại rồi chuyển trạng thái
+  // Chạy animation VÀ gọi "API" cùng lúc, chờ cả hai xong mới chuyển trạng thái
   async function rollFood() {
-    const response = await getRandomFood(budget)
+    setStatus('rolling')
+
+    // Giảm chuyển động: không chờ animation, ra kết quả ngay khi API xong
+    const animationDone = prefersReducedMotion() ? null : wait(ROLL_DURATION)
+
+    // Promise.all chờ mọi phần tử xong; kết quả trả về theo đúng thứ tự mảng
+    const [response] = await Promise.all([
+      getRandomFood(budget),
+      animationDone,
+    ])
 
     if (response.data) {
       setFood(response.data)
@@ -27,8 +50,9 @@ function FoodRollPage() {
       setFood(null)
       setStatus('empty')
     } else {
-      // Trạng thái 'error' chưa làm ở task này
+      // Trạng thái 'error' chưa làm: tạm về idle để không kẹt ở 'rolling'
       console.error(response.error)
+      setStatus('idle')
     }
   }
 
@@ -36,9 +60,15 @@ function FoodRollPage() {
 
   return (
     <main className="food-roll">
+      {/* Đang roll: chỉ có animation, không có nút nào để bấm */}
+      {status === 'rolling' && <MeteorAnimation />}
+
       {status === 'result' && (
         <>
-          <FoodCard key={food._id} food={food} />
+          {/* Bọc ngoài để làm hiệu ứng nảy, không cần sửa FoodCard */}
+          <div className="food-roll__card">
+            <FoodCard key={food._id} food={food} />
+          </div>
           <div className="food-roll__actions">
             <button
               type="button"

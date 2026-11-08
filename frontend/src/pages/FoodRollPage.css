@@ -55,3 +55,22 @@
   max-width: 420px;
   text-align: center;
 }
+
+/* FoodCard nảy lên khi xuất hiện.
+   Mỗi lần roll, status đi qua 'rolling' nên div này được tạo mới → animation chạy lại. */
+.food-roll__card {
+  animation: food-roll-pop 0.9s ease-out both;
+}
+
+@keyframes food-roll-pop {
+  0%   { opacity: 0; transform: translateY(40px) scale(0.6); }
+  50%  { opacity: 1; transform: translateY(-16px) scale(1.06); }
+  70%  { transform: translateY(4px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .food-roll__card {
+    animation: none;
+  }
+}

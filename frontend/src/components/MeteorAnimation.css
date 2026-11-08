@@ -1,0 +1,133 @@
+/* Màu TẠM — sẽ đổi theo art Procreate */
+.meteor {
+  --meteor-duration: 3.6s;
+  --meteor-night: #0d0a24;
+  --meteor-star: #ffd84a;
+  --meteor-light: #ffffff;
+  /* Điểm xuất phát (góc trên phải), tính từ giữa màn hình */
+  --meteor-start: translate(38vw, -38vh);
+
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Mọi phần chạy cùng 1 thời lượng, mốc thời gian ghi bằng %:
+   0,8s = 22%  ·  2,2s = 61%  ·  3,6s = 100% */
+.meteor > * {
+  position: absolute;
+  animation-duration: var(--meteor-duration);
+  animation-fill-mode: both;
+}
+
+/* Các phần tròn đặt ở giữa màn hình bằng top/left + margin âm,
+   để transform chỉ dùng cho chuyển động */
+.meteor__glint,
+.meteor__star,
+.meteor__burst {
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+}
+
+/* ----- Nhịp 1: nền tối ----- */
+.meteor__backdrop {
+  inset: 0;
+  background: var(--meteor-night);
+  animation-name: meteor-backdrop;
+}
+
+@keyframes meteor-backdrop {
+  0%   { opacity: 0; }
+  22%  { opacity: 0.9; }
+  100% { opacity: 0.9; }
+}
+
+/* ----- Nhịp 1: lóe sáng góc trên phải ----- */
+.meteor__glint {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  background: var(--meteor-light);
+  animation-name: meteor-glint;
+}
+
+@keyframes meteor-glint {
+  0%   { opacity: 0; transform: var(--meteor-start) scale(0.2); }
+  15%  { opacity: 1; transform: var(--meteor-start) scale(1.4); }
+  22%  { opacity: 0; transform: var(--meteor-start) scale(0.6); }
+  100% { opacity: 0; transform: var(--meteor-start) scale(0.6); }
+}
+
+/* ----- Nhịp 2: sao băng (đầu tròn vàng + đuôi) ----- */
+.meteor__star {
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  background: var(--meteor-star);
+  animation-name: meteor-star;
+}
+
+/* Đuôi: vạch nhạt dần, chĩa về góc trên phải (hướng sao bay tới) */
+.meteor__star::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--meteor-star), transparent);
+  transform: rotate(-40deg);
+  transform-origin: left center;
+}
+
+@keyframes meteor-star {
+  0%   { opacity: 0; transform: var(--meteor-start); }
+  /* Từ mốc này tới mốc sau chạy ease-in: chậm lúc đầu, nhanh dần */
+  22%  { opacity: 1; transform: var(--meteor-start); animation-timing-function: ease-in; }
+  61%  { opacity: 1; transform: translate(0, 0); }
+  62%  { opacity: 0; transform: translate(0, 0); }
+  100% { opacity: 0; transform: translate(0, 0); }
+}
+
+/* ----- Nhịp 3: chớp trắng toàn màn hình ----- */
+.meteor__flash {
+  inset: 0;
+  background: var(--meteor-light);
+  animation-name: meteor-flash;
+}
+
+@keyframes meteor-flash {
+  0%   { opacity: 0; }
+  61%  { opacity: 0; }
+  64%  { opacity: 1; }
+  75%  { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+/* ----- Nhịp 3: vòng nổ phóng to rồi mờ dần ----- */
+.meteor__burst {
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  border: 6px solid var(--meteor-star);
+  animation-name: meteor-burst;
+}
+
+@keyframes meteor-burst {
+  0%   { opacity: 0; transform: scale(0); }
+  61%  { opacity: 0; transform: scale(0); }
+  63%  { opacity: 1; transform: scale(0.5); animation-timing-function: ease-out; }
+  100% { opacity: 0; transform: scale(8); }
+}
+
+/* Người dùng tắt chuyển động: không hiện animation.
+   (FoodRollPage cũng bỏ timer 3,7s trong trường hợp này.) */
+@media (prefers-reduced-motion: reduce) {
+  .meteor {
+    display: none;
+  }
+}
