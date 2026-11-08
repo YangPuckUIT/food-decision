@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react'
 import './BudgetPanel.css'
 
-// Các mức ngân sách chọn nhanh (VND)
+// Giới hạn slider và các mức chọn nhanh (VND)
+const BUDGET_MIN = 20000
+const BUDGET_MAX = 300000
+const BUDGET_STEP = 5000
 const PRESETS = [30000, 50000, 100000, 200000]
 
-// 50000 -> "50.000đ"
+// 50000 -> "50,000₫"
 function formatPrice(value) {
-  return value.toLocaleString('vi-VN') + 'đ'
+  return value.toLocaleString('en-US') + '₫'
 }
 
 // 50000 -> "50k"
@@ -67,28 +70,29 @@ function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
     <div className="budget-overlay" tabIndex={-1} onKeyDown={handleKeyDown}>
       <section
         ref={panelRef}
-        className="budget-panel"
+        className="budget-panel wob"
         role="dialog"
         aria-modal="true"
         aria-labelledby="budget-title"
       >
         <h2 id="budget-title" className="budget-panel__title">
-          Ngân sách của bạn
+          Your budget
         </h2>
 
         <p className="budget-panel__amount">{formatPrice(budget)}</p>
 
         <label className="budget-panel__label" htmlFor="budget-range">
-          Kéo để chọn mức giá tối đa
+          Drag to set your max price ({formatPrice(BUDGET_MIN)} –{' '}
+          {formatPrice(BUDGET_MAX)})
         </label>
         <input
           ref={rangeRef}
           id="budget-range"
           className="budget-panel__range"
           type="range"
-          min="20000"
-          max="300000"
-          step="5000"
+          min={BUDGET_MIN}
+          max={BUDGET_MAX}
+          step={BUDGET_STEP}
           value={budget}
           // value của input luôn là string -> đổi sang number trước khi báo lên
           onChange={(event) => onChange(Number(event.target.value))}
@@ -101,8 +105,8 @@ function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
               type="button"
               className={
                 preset === budget
-                  ? 'budget-panel__preset budget-panel__preset--active'
-                  : 'budget-panel__preset'
+                  ? 'budget-panel__preset budget-panel__preset--active wob2'
+                  : 'budget-panel__preset wob2'
               }
               aria-pressed={preset === budget}
               onClick={() => onChange(preset)}
@@ -115,17 +119,17 @@ function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
         <div className="budget-panel__actions">
           <button
             type="button"
-            className="budget-panel__button"
+            className="budget-panel__button budget-panel__button--secondary wob2"
             onClick={onCancel}
           >
-            Huỷ
+            Cancel
           </button>
           <button
             type="button"
-            className="budget-panel__button budget-panel__button--primary"
+            className="budget-panel__button budget-panel__button--primary wob"
             onClick={onConfirm}
           >
-            Gọi sao băng
+            Call a shooting star
           </button>
         </div>
       </section>

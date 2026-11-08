@@ -1,3 +1,5 @@
+/* Style sketch — bố cục theo .design/gacha-sketch (màn budget) */
+
 /* Lớp phủ toàn màn hình, làm tối nền phía sau */
 .budget-overlay {
   position: fixed;
@@ -16,64 +18,100 @@
 
 .budget-panel {
   width: 100%;
-  max-width: 420px;
-  padding: 24px;
-  border-radius: 16px;
+  max-width: 520px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left; /* không kế thừa căn giữa từ trang chứa panel */
   background: var(--color-surface);
-  color: var(--color-text);
-  text-align: center;
+  border: 3px solid var(--color-ink);
+  box-shadow: 6px 6px 0 var(--color-ink);
+  animation: budget-panel-pop 0.3s ease-out both;
+}
+
+@keyframes budget-panel-pop {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to   { opacity: 1; transform: none; }
 }
 
 .budget-panel__title {
-  font-size: 1.25rem;
+  font-size: 32px;
+  font-weight: 400;
 }
 
 .budget-panel__amount {
-  margin: 12px 0 20px;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-primary);
+  font-size: 52px;
+  text-align: center;
 }
 
 .budget-panel__label {
-  display: block;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  font-size: 18px;
+  color: var(--color-muted);
 }
 
 .budget-panel__range {
   width: 100%;
   min-height: 44px;
-  accent-color: var(--color-primary);
+  accent-color: var(--color-ink);
 }
 
 .budget-panel__presets {
   display: flex;
-  gap: 8px;
-  margin: 16px 0 24px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .budget-panel__preset,
 .budget-panel__button {
-  flex: 1;
   min-height: 44px;
-  border: 2px solid var(--color-primary);
-  border-radius: 8px;
-  background: var(--color-surface);
-  color: var(--color-text);
-  font: inherit;
+  border: 2.5px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  font-family: inherit;
   cursor: pointer;
 }
 
-/* Preset đang chọn: tô đậm */
-.budget-panel__preset--active,
-.budget-panel__button--primary {
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font-weight: 700;
+.budget-panel__preset {
+  flex: 1;
+  padding: 0 16px;
+  font-size: 19px;
+}
+
+/* Preset đang chọn: tô nền mực */
+.budget-panel__preset--active {
+  background: var(--color-ink);
+  color: var(--color-surface);
 }
 
 .budget-panel__actions {
   display: flex;
   gap: 12px;
+  margin-top: 6px;
+}
+
+.budget-panel__button {
+  min-height: 52px;
+  font-size: 22px;
+}
+
+/* Nút phụ: viền đứt nét, nền trong suốt */
+.budget-panel__button--secondary {
+  flex: 1;
+  border-style: dashed;
+}
+
+/* Nút chính: nền mực */
+.budget-panel__button--primary {
+  flex: 2;
+  border-width: 3px;
+  background: var(--color-ink);
+  color: var(--color-surface);
+  font-size: 24px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .budget-panel {
+    animation: none;
+  }
 }

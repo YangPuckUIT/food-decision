@@ -10,7 +10,8 @@ export const mockFoods = [
     meal: ["Breakfast", "Snack"],
     price: 20000,
     calories: 450,
-    description: "Bánh mì giòn kẹp thịt nguội, pate, dưa leo và rau thơm.",
+    description:
+      "Spotted on every street corner at dawn. Defends itself with a crackly crust and a surprise smear of pâté.",
     tags: ["street-food", "quick", "bread"],
     imageUrl: "/images/foods/banh-mi-thit.png",
     category: "fast-food",
@@ -24,7 +25,8 @@ export const mockFoods = [
     meal: ["Breakfast", "Lunch", "Dinner"],
     price: 55000,
     calories: 550,
-    description: "Phở nước dùng hầm xương bò, bánh phở mềm, thịt bò tái chín.",
+    description:
+      "Most active around 7 a.m. Attacks with clouds of star-anise steam. Weak against a squeeze of lime.",
     tags: ["noodle", "soup", "beef"],
     imageUrl: "/images/foods/pho-bo.png",
     category: "noodle-soup",
@@ -38,7 +40,8 @@ export const mockFoods = [
     meal: ["Lunch", "Dinner"],
     price: 45000,
     calories: 750,
-    description: "Cơm tấm với sườn nướng, bì, chả trứng và nước mắm chua ngọt.",
+    description:
+      "A hearty rice beast that roams at lunchtime. Its grilled pork chop can be smelled three alleys away.",
     tags: ["rice", "pork", "grilled"],
     imageUrl: "/images/foods/com-tam.png",
     category: "rice",
@@ -52,7 +55,8 @@ export const mockFoods = [
     meal: ["Lunch", "Dinner"],
     price: 180000,
     calories: 520,
-    description: "Phần sushi gồm cá hồi, cá ngừ, tôm và cơm cuộn rong biển.",
+    description:
+      "A rare visitor from the eastern seas. Travels in tidy little rows and never stays fresh for long.",
     tags: ["seafood", "raw", "rice"],
     imageUrl: "/images/foods/sushi-set.png",
     category: "rice",
@@ -66,7 +70,8 @@ export const mockFoods = [
     meal: ["Dinner"],
     price: 280000,
     calories: 900,
-    description: "Lẩu chua cay kiểu Thái với tôm, mực, nghêu, ăn cho 2–3 người.",
+    description:
+      "A bubbling sour-and-spicy giant. Best approached in a party of two or three. Do not stare into the chili.",
     tags: ["hotpot", "spicy", "seafood", "group"],
     imageUrl: "/images/foods/lau-thai.png",
     category: "hotpot-grill",
@@ -80,7 +85,8 @@ export const mockFoods = [
     meal: ["Snack"],
     price: 25000,
     calories: 350,
-    description: "Bánh tráng cắt sợi trộn khô bò, trứng cút, xoài xanh, sa tế và rau răm.",
+    description:
+      "A tiny, chaotic snack sprite. Tosses itself together with dried beef, quail eggs and green mango. Mildly fiery.",
     tags: ["street-food", "spicy", "rice-paper"],
     imageUrl: "/images/foods/banh-trang-tron.png",
     category: "street-snack",

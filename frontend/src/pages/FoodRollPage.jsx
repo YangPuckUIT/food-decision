@@ -72,13 +72,14 @@ function FoodRollPage() {
   // Nhờ vậy nút đã mở panel vẫn còn trên trang để trả focus về.
   const screen = status === 'budget' ? cancelTarget : status
 
-  const formattedBudget = budget.toLocaleString('vi-VN') + 'đ'
+  // 50000 -> "50,000₫"
+  const formattedBudget = budget.toLocaleString('en-US') + '₫'
 
   return (
     <main className="food-roll">
       {/* Luôn có trên trang; chỉ đổi chữ bên trong để trình đọc màn hình đọc lên */}
       <p className="visually-hidden" role="status">
-        {status === 'rolling' ? 'Đang gọi sao băng…' : ''}
+        {status === 'rolling' ? 'Calling a shooting star…' : ''}
       </p>
 
       {/* Đang roll: chỉ có animation, không có nút nào để bấm */}
@@ -93,17 +94,17 @@ function FoodRollPage() {
           <div className="food-roll__actions">
             <button
               type="button"
-              className="food-roll__button"
+              className="food-roll__button wob"
               onClick={rollFood}
             >
-              Roll lại
+              Roll again
             </button>
             <button
               type="button"
-              className="food-roll__button food-roll__button--secondary"
+              className="food-roll__button food-roll__button--secondary wob2"
               onClick={() => setStatus('budget')}
             >
-              Đổi ngân sách
+              Change budget
             </button>
           </div>
         </>
@@ -111,40 +112,42 @@ function FoodRollPage() {
 
       {screen === 'empty' && (
         <>
-          <h2 className="food-roll__title">Sao băng chưa tìm thấy món nào</h2>
+          <h2 className="food-roll__title">The shooting star found nothing</h2>
           <p className="food-roll__message">
-            Không có món nào dưới {formattedBudget}. Thử tăng ngân sách nhé.
+            No food under {formattedBudget}. Try a bigger budget.
           </p>
           <button
             type="button"
-            className="food-roll__button"
+            className="food-roll__button wob"
             onClick={() => setStatus('budget')}
           >
-            Tăng ngân sách
+            Raise budget
           </button>
         </>
       )}
 
       {screen === 'error' && (
         <>
-          <h2 className="food-roll__title">Không kết nối được tới bếp</h2>
-          <p className="food-roll__message">Kiểm tra mạng rồi thử lại.</p>
+          <h2 className="food-roll__title">Can't reach the kitchen</h2>
+          <p className="food-roll__message">
+            Check your connection and try again.
+          </p>
           <button
             type="button"
-            className="food-roll__button"
+            className="food-roll__button wob"
             onClick={rollFood}
           >
-            Roll lại
+            Roll again
           </button>
         </>
       )}
 
       {screen === 'idle' && (
         <>
-          <h1 className="food-roll__title">Hôm nay ăn gì?</h1>
+          <h1 className="food-roll__title">Today's pick?</h1>
           <button
             type="button"
-            className="food-roll__button"
+            className="food-roll__button food-roll__button--big wob"
             onClick={() => setStatus('budget')}
           >
             Roll

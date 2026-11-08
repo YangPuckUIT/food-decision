@@ -1,3 +1,17 @@
+/* Màu dùng chung — style sketch / sổ tay vẽ tay (WORKING, chốt theo art sau).
+   Component chỉ dùng var(--...), không viết mã màu trực tiếp. */
+:root {
+  --color-paper: #f4efe4;   /* nền trang */
+  --color-grid: #e4dccb;    /* đường kẻ ô */
+  --color-surface: #fffdf7; /* thẻ, panel */
+  --color-ink: #2b2b2b;     /* chữ, viền, nút chính */
+  --color-muted: #6b6255;   /* chữ phụ, viền khung chờ ảnh */
+  --color-note: #fff7c2;    /* nhãn ghi chú vàng */
+  --color-overlay: rgb(43 43 43 / 0.25); /* nền tối sau panel */
+
+  --font-hand: 'Patrick Hand', system-ui, sans-serif;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,8 +19,31 @@
 }
 
 body {
-  font-family: system-ui, sans-serif;
   min-height: 100vh;
+  font-family: var(--font-hand);
+  color: var(--color-ink);
+  /* Giấy kẻ ô 32px: 2 dải gradient 1px, một ngang một dọc */
+  background-color: var(--color-paper);
+  background-image:
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Viền "run tay": bo 4 góc lệch nhau. Hai biến thể để các khối cạnh nhau không giống hệt */
+.wob {
+  border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+}
+
+.wob2 {
+  border-radius: 18px 225px 18px 255px / 255px 18px 225px 18px;
+}
+
+/* Viền focus rõ khi dùng bàn phím (nút nền mực không thấy viền mặc định) */
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 4px;
 }
 
 /* Ẩn khỏi mắt nhưng trình đọc màn hình vẫn đọc được */
