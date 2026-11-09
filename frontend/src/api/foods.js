@@ -1,25 +1,21 @@
-// ⚠️ MOCK — chưa gọi Backend thật.
-// Sau này thay phần thân hàm bằng:
-//   const res = await fetch(`/api/foods/random?maxPrice=${maxPrice}`)
-//   return res.json()
-// Format trả về giữ y như API thật nên FoodRollPage không phải sửa:
-//   thành công: { data: food }
-//   không có món (API thật trả 404): { error: { code: 'FOOD_NOT_FOUND', message } }
-import { mockFoods } from '../mocks/foods'
+const BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '')
 
-export async function getRandomFood(maxPrice) {
-  const affordable = mockFoods.filter((food) => food.price <= maxPrice)
-
-  if (affordable.length === 0) {
-    return {
-      error: {
-        code: 'FOOD_NOT_FOUND',
-        message: 'No food found within the given budget.',
-      },
-    }
+async function request(path, options = {}) {
+  try {
+    const response = await fetch(`${BASE}/api${path}`, {
+      ...options,
+      signal: AbortSignal.timeout(15000),
+      headers: { 'Content-Type': 'application/json', ...options.headers },
+    })
+    const payload = await response.json()
+    if (!response.ok) return { error: payload.error || { code: 'REQUEST_FAILED', message: 'Không thể xử lý yêu cầu.' } }
+    return payload
+  } catch {
+    return { error: { code: 'NETWORK_ERROR', message: 'Không kết nối được máy chủ. Kiểm tra backend rồi thử lại.' } }
   }
-
-  // Chọn ngẫu nhiên đều: mỗi món có xác suất 1 / affordable.length
-  const index = Math.floor(Math.random() * affordable.length)
-  return { data: affordable[index] }
 }
+export const getRandomFood = maxPrice => request(`/foods/random?maxPrice=${encodeURIComponent(maxPrice)}`)
+export const getFoods = () => request('/foods')
+export const getFood = id => request(`/foods/${encodeURIComponent(id)}`)
+export const getRecommendations = input => request('/recommendations', { method: 'POST', body: JSON.stringify(input) })
+export const getGroupDecision = input => request('/group-decision', { method: 'POST', body: JSON.stringify(input) })
