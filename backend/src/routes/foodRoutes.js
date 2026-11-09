@@ -124,13 +124,22 @@ router.get("/random", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const foods = await Food.find();
-        return res.json(foods);
+        const foods = await Food.find().sort({ price: 1, name: 1, _id: 1 }).lean();
+        return res.json({ data: foods });
     } catch (error) {
         return res.status(500).json({
-            message: "Failed to get foods"
+            error: { code: "INTERNAL_SERVER_ERROR", message: "Failed to get foods" }
         });
     }
+});
+
+router.get("/:id", async (req, res) => {
+    if (!/^[a-f\d]{24}$/i.test(req.params.id)) {
+        return res.status(400).json({ error: { code: "INVALID_INPUT", message: "Invalid input: id" } });
+    }
+    const food = await Food.findById(req.params.id).lean();
+    if (!food) return res.status(404).json({ error: { code: "FOOD_NOT_FOUND", message: "Food not found." } });
+    return res.json({ data: food });
 });
 
 module.exports = router;

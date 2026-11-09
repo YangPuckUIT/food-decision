@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import BudgetPanel from '../components/BudgetPanel'
 import FoodCard from '../components/FoodCard'
 import { getRandomFood } from '../api/foods'
@@ -7,7 +7,7 @@ import './FoodRollPage.css'
 const DEFAULT_BUDGET = 50000
 
 function FoodRollPage() {
-  // 'idle' | 'budget' | 'result' | 'empty' (sau này thêm 'rolling', 'error')
+  // idle | budget | rolling | result | empty | error
   const [status, setStatus] = useState('idle')
 
   // Ngân sách giữ ở đây (component cha), không giữ trong BudgetPanel
@@ -15,10 +15,17 @@ function FoodRollPage() {
 
   // Món vừa roll được; null khi chưa có
   const [food, setFood] = useState(null)
+  const [error, setError] = useState('')
+  const busy = useRef(false)
 
-  // Gọi "API" random với ngân sách hiện tại rồi chuyển trạng thái
+  // Gọi API random với ngân sách hiện tại rồi chuyển trạng thái
   async function rollFood() {
+    if (busy.current) return
+    busy.current = true
+    setStatus('rolling')
+    setError('')
     const response = await getRandomFood(budget)
+    busy.current = false
 
     if (response.data) {
       setFood(response.data)
@@ -27,8 +34,8 @@ function FoodRollPage() {
       setFood(null)
       setStatus('empty')
     } else {
-      // Trạng thái 'error' chưa làm ở task này
-      console.error(response.error)
+      setError(response.error.message)
+      setStatus('error')
     }
   }
 
@@ -36,6 +43,8 @@ function FoodRollPage() {
 
   return (
     <main className="food-roll">
+      {status === 'rolling' && <p role="status">Đang gọi sao băng…</p>}
+      {status === 'error' && <section><p role="alert">{error}</p><button type="button" onClick={() => setStatus('budget')}>Thử lại</button></section>}
       {status === 'result' && (
         <>
           <FoodCard key={food._id} food={food} />

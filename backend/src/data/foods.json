@@ -1,0 +1,453 @@
+[
+  {
+    "name": "Phở bò",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 45000,
+    "calories": 550,
+    "description": "Phở bò; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/pho-bo.png",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 2
+  },
+  {
+    "name": "Bún bò Huế",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 50000,
+    "calories": 700,
+    "description": "Bún bò Huế; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/bun-bo-hue.png",
+    "category": "noodle-soup",
+    "spicy": 2,
+    "fullness": 3
+  },
+  {
+    "name": "Mì Quảng",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 40000,
+    "calories": 550,
+    "description": "Mì Quảng; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/mi-quang.png",
+    "category": "noodle-soup",
+    "spicy": 1,
+    "fullness": 2
+  },
+  {
+    "name": "Hủ tiếu",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 35000,
+    "calories": 550,
+    "description": "Hủ tiếu; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/hu-tieu.png",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 2
+  },
+  {
+    "name": "Bún riêu",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 35000,
+    "calories": 550,
+    "description": "Bún riêu; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/bun-rieu.png",
+    "category": "noodle-soup",
+    "spicy": 1,
+    "fullness": 2
+  },
+  {
+    "name": "Cơm tấm",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 45000,
+    "calories": 700,
+    "description": "Cơm tấm; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/com-tam.png",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3
+  },
+  {
+    "name": "Cơm gà",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 50000,
+    "calories": 700,
+    "description": "Cơm gà; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/com-ga.png",
+    "category": "rice",
+    "spicy": 1,
+    "fullness": 3
+  },
+  {
+    "name": "Cơm bò cay",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 60000,
+    "calories": 700,
+    "description": "Cơm bò cay; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/com-bo-cay.png",
+    "category": "rice",
+    "spicy": 2,
+    "fullness": 3
+  },
+  {
+    "name": "Cơm chiên",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 35000,
+    "calories": 550,
+    "description": "Cơm chiên; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/com-chien.png",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 2
+  },
+  {
+    "name": "Cơm cà ri cay",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 65000,
+    "calories": 700,
+    "description": "Cơm cà ri cay; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/com-ca-ri-cay.png",
+    "category": "rice",
+    "spicy": 2,
+    "fullness": 3
+  },
+  {
+    "name": "Bánh mì",
+    "cuisine": "Fusion",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 20000,
+    "calories": 400,
+    "description": "Bánh mì; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/banh-mi.png",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 1
+  },
+  {
+    "name": "Burger gà cay",
+    "cuisine": "Fusion",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 50000,
+    "calories": 550,
+    "description": "Burger gà cay; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/burger-ga-cay.png",
+    "category": "fast-food",
+    "spicy": 2,
+    "fullness": 2
+  },
+  {
+    "name": "Pizza cá nhân",
+    "cuisine": "Fusion",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 100000,
+    "calories": 700,
+    "description": "Pizza cá nhân; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/pizza-ca-nhan.png",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3
+  },
+  {
+    "name": "Gà rán cay",
+    "cuisine": "Fusion",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 65000,
+    "calories": 550,
+    "description": "Gà rán cay; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/ga-ran-cay.png",
+    "category": "fast-food",
+    "spicy": 2,
+    "fullness": 2
+  },
+  {
+    "name": "Sandwich trứng",
+    "cuisine": "Fusion",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 30000,
+    "calories": 400,
+    "description": "Sandwich trứng; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/sandwich-trung.png",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 1
+  },
+  {
+    "name": "Lẩu Thái phần cá nhân",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 100000,
+    "calories": 700,
+    "description": "Lẩu Thái phần cá nhân; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/lau-thai-ca-nhan.png",
+    "category": "hotpot-grill",
+    "spicy": 2,
+    "fullness": 3
+  },
+  {
+    "name": "Bò nướng phần cá nhân",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 150000,
+    "calories": 700,
+    "description": "Bò nướng phần cá nhân; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/bo-nuong-ca-nhan.png",
+    "category": "hotpot-grill",
+    "spicy": 1,
+    "fullness": 3
+  },
+  {
+    "name": "Lẩu nấm phần cá nhân",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 80000,
+    "calories": 550,
+    "description": "Lẩu nấm phần cá nhân; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/lau-nam-ca-nhan.png",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 2
+  },
+  {
+    "name": "Hải sản nướng phần cá nhân",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "price": 300000,
+    "calories": 700,
+    "description": "Hải sản nướng phần cá nhân; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/hai-san-nuong-ca-nhan.png",
+    "category": "hotpot-grill",
+    "spicy": 1,
+    "fullness": 3
+  },
+  {
+    "name": "Bánh tráng trộn",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Snack"
+    ],
+    "price": 25000,
+    "calories": 400,
+    "description": "Bánh tráng trộn; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/banh-trang-tron.png",
+    "category": "street-snack",
+    "spicy": 2,
+    "fullness": 1
+  },
+  {
+    "name": "Gỏi cuốn",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Snack"
+    ],
+    "price": 30000,
+    "calories": 400,
+    "description": "Gỏi cuốn; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/goi-cuon.png",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1
+  },
+  {
+    "name": "Bắp xào",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Snack"
+    ],
+    "price": 25000,
+    "calories": 400,
+    "description": "Bắp xào; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/bap-xao.png",
+    "category": "street-snack",
+    "spicy": 1,
+    "fullness": 1
+  },
+  {
+    "name": "Khoai nướng",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Snack"
+    ],
+    "price": 20000,
+    "calories": 400,
+    "description": "Khoai nướng; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/khoai-nuong.png",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1
+  },
+  {
+    "name": "Bánh tráng nướng",
+    "cuisine": "Vietnamese",
+    "meal": [
+      "Snack"
+    ],
+    "price": 30000,
+    "calories": 400,
+    "description": "Bánh tráng nướng; khẩu phần tham khảo cho một người.",
+    "tags": [
+      "sample",
+      "single-serving"
+    ],
+    "imageUrl": "/images/foods/banh-trang-nuong.png",
+    "category": "street-snack",
+    "spicy": 1,
+    "fullness": 1
+  }
+]

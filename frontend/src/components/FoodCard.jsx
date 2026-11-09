@@ -25,7 +25,7 @@ function FoodCard({ food }) {
           className="food-card__image food-card__image--placeholder"
           role="img"
           aria-label={food.name}
-        />
+        ><span aria-hidden="true" style={{ fontSize: 64 }}>🍲</span></div>
       )}
 
       <div className="food-card__body">
