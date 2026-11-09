@@ -8,7 +8,8 @@
     "dev": "node --watch src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node scripts/seed-foods.cjs --write",
-    "seed:validate": "node scripts/seed-foods.cjs --validate"
+    "seed:validate": "node scripts/seed-foods.cjs --validate",
+    "migrate:foods": "node scripts/migrate-food-catalog.cjs"
   },
   "keywords": [],
   "author": "",
