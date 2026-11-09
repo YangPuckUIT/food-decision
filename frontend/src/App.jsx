@@ -5,8 +5,8 @@ import { getFoods, getFood, getRecommendations, getGroupDecision } from './api/f
 import './MvpApp.css'
 
 const categories = [
-  ['noodle-soup', 'Món nước'], ['rice', 'Cơm'], ['fast-food', 'Ăn nhanh'],
-  ['hotpot-grill', 'Lẩu & Nướng'], ['street-snack', 'Ăn vặt'],
+  ['noodle-soup', 'Mì & bún'], ['rice', 'Cơm'], ['fast-food', 'Ăn nhanh'],
+  ['hotpot-grill', 'Lẩu & Nướng'], ['street-snack', 'Ăn vặt'], ['other', 'Khác'],
 ]
 const reasons = {
   CATEGORY_MATCH: 'Đúng loại món yêu thích', SPICY_MATCH: 'Đúng độ cay', SPICY_CLOSE: 'Gần độ cay mong muốn',

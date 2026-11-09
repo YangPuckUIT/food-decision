@@ -1,0 +1,1201 @@
+[
+  {
+    "_id": "6abd8b75325fd088834bfd4b",
+    "name": "Pho Bo",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd4c",
+    "name": "Pho Ga",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd4d",
+    "name": "Bun Bo Hue",
+    "category": "noodle-soup",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd4e",
+    "name": "Bun Rieu",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd4f",
+    "name": "Bun Thit Nuong",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd50",
+    "name": "Bun Cha",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd51",
+    "name": "Bun Mam",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd52",
+    "name": "Bun Ca",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd53",
+    "name": "Bun Dau Mam Tom",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd54",
+    "name": "Banh Canh Cua",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd55",
+    "name": "Banh Canh Ca Loc",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd56",
+    "name": "Hu Tieu Nam Vang",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd57",
+    "name": "Hu Tieu Mi",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd58",
+    "name": "Mi Quang",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd59",
+    "name": "Cao Lau",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5a",
+    "name": "Com Tam",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5b",
+    "name": "Com Ga Hoi An",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5c",
+    "name": "Com Chien Duong Chau",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5d",
+    "name": "Com Rang Dua Bo",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5e",
+    "name": "Com Nieu",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd5f",
+    "name": "Com Hen",
+    "category": "rice",
+    "spicy": 1,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd60",
+    "name": "Com Suon",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd61",
+    "name": "Banh Mi Thit",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd62",
+    "name": "Banh Mi Xiu Mai",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd63",
+    "name": "Banh Mi Cha Ca",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd64",
+    "name": "Banh Xeo",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd65",
+    "name": "Banh Khot",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd66",
+    "name": "Banh Cuon",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd67",
+    "name": "Banh Uot",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd68",
+    "name": "Banh Beo",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd69",
+    "name": "Banh Nam",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6a",
+    "name": "Banh Bot Loc",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6b",
+    "name": "Banh Can",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6c",
+    "name": "Banh Duc",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6d",
+    "name": "Goi Cuon",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Dinner",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6e",
+    "name": "Cha Gio",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Dinner",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd6f",
+    "name": "Nem Nuong",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd70",
+    "name": "Goi Ga",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd71",
+    "name": "Goi Ngo Sen",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd72",
+    "name": "Thit Kho Trung",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd73",
+    "name": "Ca Kho To",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd74",
+    "name": "Canh Chua Ca",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd75",
+    "name": "Ca Loc Nuong",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd76",
+    "name": "Ga Nuong",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd77",
+    "name": "Ga Kho Gung",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd78",
+    "name": "Bo Luc Lac",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd79",
+    "name": "Bo Kho",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7a",
+    "name": "Cha Ca La Vong",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7b",
+    "name": "Lau Thai",
+    "category": "hotpot-grill",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7c",
+    "name": "Lau Ca Keo",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7d",
+    "name": "Hamburger",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7e",
+    "name": "Cheeseburger",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd7f",
+    "name": "Hot Dog",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd80",
+    "name": "Fried Chicken",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd81",
+    "name": "Buffalo Wings",
+    "category": "fast-food",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Dinner",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd82",
+    "name": "Mac and Cheese",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd83",
+    "name": "BBQ Ribs",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd84",
+    "name": "Clam Chowder",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd85",
+    "name": "Pancakes",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd86",
+    "name": "Apple Pie",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd87",
+    "name": "Croissant",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd88",
+    "name": "Baguette",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd89",
+    "name": "Ratatouille",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8a",
+    "name": "Coq au Vin",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8b",
+    "name": "Beef Bourguignon",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8c",
+    "name": "Quiche Lorraine",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8d",
+    "name": "Crepe",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8e",
+    "name": "French Onion Soup",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 2,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd8f",
+    "name": "Escargots",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd90",
+    "name": "Duck Confit",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd91",
+    "name": "Sushi",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd92",
+    "name": "Sashimi",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd93",
+    "name": "Ramen",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd94",
+    "name": "Udon",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd95",
+    "name": "Soba",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd96",
+    "name": "Tempura",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd97",
+    "name": "Tonkatsu",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd98",
+    "name": "Yakitori",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd99",
+    "name": "Okonomiyaki",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9a",
+    "name": "Takoyaki",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9b",
+    "name": "Pizza Margherita",
+    "category": "fast-food",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9c",
+    "name": "Spaghetti Carbonara",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9d",
+    "name": "Lasagna",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9e",
+    "name": "Risotto",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfd9f",
+    "name": "Ravioli",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda0",
+    "name": "Gnocchi",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda1",
+    "name": "Fettuccine Alfredo",
+    "category": "other",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda2",
+    "name": "Bruschetta",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Lunch",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda3",
+    "name": "Tiramisu",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda4",
+    "name": "Panna Cotta",
+    "category": "street-snack",
+    "spicy": 0,
+    "fullness": 1,
+    "meal": [
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda5",
+    "name": "Bibimbap",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda6",
+    "name": "Kimchi Fried Rice",
+    "category": "rice",
+    "spicy": 1,
+    "fullness": 3,
+    "meal": [
+      "Breakfast",
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda7",
+    "name": "Tteokbokki",
+    "category": "other",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda8",
+    "name": "Korean Fried Chicken",
+    "category": "fast-food",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Dinner",
+      "Snack"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfda9",
+    "name": "Bulgogi",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfdaa",
+    "name": "Galbi",
+    "category": "hotpot-grill",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfdab",
+    "name": "Japchae",
+    "category": "noodle-soup",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfdac",
+    "name": "Kimchi Jjigae",
+    "category": "other",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfdad",
+    "name": "Sundubu Jjigae",
+    "category": "other",
+    "spicy": 2,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Dinner"
+    ],
+    "imageUrl": ""
+  },
+  {
+    "_id": "6abd8b75325fd088834bfdae",
+    "name": "Kimbap",
+    "category": "rice",
+    "spicy": 0,
+    "fullness": 3,
+    "meal": [
+      "Lunch",
+      "Breakfast",
+      "Snack"
+    ],
+    "imageUrl": ""
+  }
+]

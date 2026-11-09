@@ -18,6 +18,19 @@ npm.cmd run dev
 
 Seed upserts 24 sample meals by case-insensitive name. It does not delete the existing collection. Existing matching names are updated; unrelated records remain. It stops before writes if duplicate names exist. These are sample per-person prices and illustrative nutrition, not restaurant quotes. Actual food images are still to be supplied by the frontend team; cards show an icon when images are absent.
 
+
+## Update the existing Atlas food records
+
+After exporting a backup of the `foods` collection, run this from `backend/`:
+
+```powershell
+npm.cmd run migrate:foods
+```
+
+The one-time migration uses `MONGO_URI` (and optional `MONGO_DB_NAME`) from `backend/.env`. It requires the target `foods` collection to contain exactly the 100 exported records and checks every `_id` and name before writing. It updates those records in place, normalizes `meal`, adds `category`, `spicy`, `fullness`, and an empty `imageUrl`, and inserts/deletes nothing. If count or identity does not match, it stops before writing. The category, spice, and fullness values are project classifications for this app.
+
+Do not run `npm run seed` for this existing catalog. Keep the Compass export outside the repository as the backup.
+
 ## Frontend (second terminal, repository root)
 
 ```powershell
