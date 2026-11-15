@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const decisionRoutes = require("./routes/decisionRoutes");
 const foodRoutes = require("./routes/foodRoutes");
+const gachaRoutes = require("./routes/gachaRoutes");
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
 app.use("/api/foods", foodRoutes);
+app.use("/api/gacha", gachaRoutes);
 
 app.use("/api", decisionRoutes);
 app.use((req, res) => res.status(404).json({ error: { code: "ROUTE_NOT_FOUND", message: "Route not found." } }));
