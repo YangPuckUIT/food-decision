@@ -7,6 +7,7 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "test": "node --test && node check-food.cjs",
+    "test:fixture": "node tools/serve-contract-fixture.cjs",
     "seed": "node scripts/seed-foods.cjs --write",
     "seed:validate": "node scripts/seed-foods.cjs --validate",
     "migrate:foods": "node scripts/migrate-food-catalog.cjs"

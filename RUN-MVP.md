@@ -1,35 +1,34 @@
 # Run Food Decision MVP
 
+For the current API contract, offline tests, Postman collection and deployment
+handoff, see [backend/API.md](backend/API.md) and
+[backend/DEPLOYMENT.md](backend/DEPLOYMENT.md). The existing 100-food catalog is
+already provisioned: **do not run seed or migrate commands for API development**.
+
 Use Node.js 22.12+ or 24. Start both apps in separate terminals.
 
 ## Backend
 
 ```powershell
 cd backend
-npm.cmd ci
+npm.cmd ci --ignore-scripts
+npm.cmd test
 ```
 
-Keep your existing `.env` and MONGO_URI. Add `MONGO_DB_NAME=food-decision-mvp` to use a separate demo database for BOTH the API and seed. Set `PORT=3000` for the frontend development proxy. Never commit `.env`.
+Offline tests need no environment file or MongoDB connection. For offline Postman
+testing run `npm.cmd run test:fixture` and import the collection/environment from
+`backend/postman/`. See backend/API.md for instructions and verification results.
 
-```powershell
-npm.cmd run seed
-npm.cmd run dev
-```
+The existing 100-food catalog and metadata are already provisioned. Do not seed,
+import, delete or migrate data as part of running or testing this API. Existing
+food images are still to be supplied by frontend; cards use a fallback when absent.
+Catalog prices and nutrition are illustrative, not restaurant quotes.
 
-Seed upserts 24 sample meals by case-insensitive name. It does not delete the existing collection. Existing matching names are updated; unrelated records remain. It stops before writes if duplicate names exist. These are sample per-person prices and illustrative nutrition, not restaurant quotes. Actual food images are still to be supplied by the frontend team; cards show an icon when images are absent.
-
-
-## Update the existing Atlas food records
-
-After exporting a backup of the `foods` collection, run this from `backend/`:
-
-```powershell
-npm.cmd run migrate:foods
-```
-
-The one-time migration uses `MONGO_URI` (and optional `MONGO_DB_NAME`) from `backend/.env`. It requires the target `foods` collection to contain exactly the 100 exported records and checks every `_id` and name before writing. It updates those records in place, normalizes `meal`, adds `category`, `spicy`, `fullness`, and an empty `imageUrl`, and inserts/deletes nothing. If count or identity does not match, it stops before writing. The category, spice, and fullness values are project classifications for this app.
-
-Do not run `npm run seed` for this existing catalog. Keep the Compass export outside the repository as the backup.
+To run the real API against the existing configured catalog when authorized, keep
+your private `.env` and database configuration, confirm the catalog database with
+the owner, set PORT=3000 for the frontend development proxy, then run
+`npm.cmd run dev`. That command opens a MongoDB connection. Never commit `.env`.
+For hosting configuration use backend/DEPLOYMENT.md.
 
 ## Frontend (second terminal, repository root)
 
@@ -55,10 +54,11 @@ Open http://localhost:5173. Vite proxies `/api` to http://localhost:3000. For a 
 All endpoints use `{data: ...}` or `{error: {code, message}}`.
 
 - GET /api/health
+- GET /api/gacha?budget=50000 (strict budget 20000–300000; legacy random retained)
 - GET /api/foods
 - GET /api/foods/:id
 - GET /api/foods/random?maxPrice=50000 (existing filters retained)
 - POST /api/recommendations: `{ "budget": 50000, "categories": [], "spicy": 0, "fullness": 2 }`
 - POST /api/group-decision: `{ "foodIds": ["<id1>", "<id2>"], "budget": 50000, "noSpicy": false, "avoidCategories": [] }`
 
-This implementation has not been run, built or tested in this change, per the requested deadline workflow. The seed has not been executed against Atlas. Frontend navigation is local state, not shareable URL routes; group selection is on one device, without realtime rooms or voting.
+The original MVP was delivered without runtime tests. The backend API completion now includes offline HTTP/service/schema tests and a Postman fixture workflow; see backend/API.md. Atlas connectivity and public deployment have not been tested in this change. Frontend navigation is local state, not shareable URL routes; group selection is on one device, without realtime rooms or voting.
