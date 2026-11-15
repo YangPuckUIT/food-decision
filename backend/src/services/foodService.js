@@ -8,4 +8,12 @@ async function randomFood(match) {
     return food;
 }
 
-module.exports = { randomFood };
+function listFoods() {
+    return Food.find().sort({ price: 1, name: 1, _id: 1 }).lean();
+}
+
+function getFood(id) {
+    return Food.findById(id).lean();
+}
+
+module.exports = { randomFood, listFoods, getFood };
