@@ -1,57 +1,19 @@
-/* Màu TẠM — sẽ đổi theo art Procreate.
-   Khai báo ở .food-roll nên BudgetPanel (nằm bên trong) cũng dùng được. */
-.food-roll {
-  --color-bg: #fff8ec;
-  --color-surface: #ffffff;
-  --color-text: #2b2118;
-  --color-primary: #7a3cc2;
-  --color-on-primary: #ffffff;
-  --color-overlay: rgb(0 0 0 / 0.6);
-
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  padding: 16px;
-  background: var(--color-bg);
-  color: var(--color-text);
-}
-
-.food-roll__title {
-  font-size: 2.5rem;
-  text-align: center;
-}
-
-.food-roll__button {
-  min-width: 160px;
-  min-height: 44px;
-  padding: 0 24px;
-  border: none;
-  border-radius: 999px;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font: inherit;
-  font-size: 1.25rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.food-roll__button--secondary {
-  border: 2px solid var(--color-primary);
-  background: var(--color-surface);
-  color: var(--color-primary);
-}
-
-.food-roll__actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-}
-
-.food-roll__message {
-  max-width: 420px;
-  text-align: center;
-}
+.roll-layout { display: grid; gap: 24px; }
+.roll-budget { padding: 32px 24px; background: var(--color-tint); border: 1px solid var(--color-rule); border-radius: var(--radius); }
+.roll-budget > .landmark { width: 112px; height: 112px; margin-bottom: 20px; }
+.roll-budget h2 { font-size: 1.5rem; }
+.roll-budget__amount { font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); margin: 12px 0; font-variant-numeric: tabular-nums; }
+.roll-budget > p:not(.roll-budget__amount) { max-width: 28ch; color: var(--color-muted); font-size: .875rem; }
+.roll-budget > .text-button { margin-top: 16px; }
+.roll-stage { min-width: 0; }
+.roll-intro { display: flex; align-items: center; flex-direction: column; text-align: center; justify-content: center; min-height: 360px; padding: 32px 24px; border: 1px solid var(--color-rule); background: var(--color-paper); border-radius: var(--radius); }
+.roll-intro > .icon { color: var(--color-brass); width: 48px; height: 48px; margin-bottom: 28px; }
+.roll-intro > p { color: var(--color-muted); margin: 16px 0 28px; max-width: 34ch; }
+.roll-result { max-width: 620px; }
+.result-heading { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
+.result-heading > .icon { color: var(--color-primary); }
+.result-heading h2 { font-size: 1.6rem; }
+.roll-result .food-image { max-height: 220px; }
+.roll-result__description { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--color-rule); color: var(--color-muted); font-size: .9rem; }
+.food-roll__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+@media (min-width: 768px) { .roll-layout { grid-template-columns: minmax(240px, .75fr) minmax(0, 1.5fr); gap: 32px; }.roll-budget { align-self: start; }.roll-intro { min-height: 440px; } }
