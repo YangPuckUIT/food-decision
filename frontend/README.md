@@ -1,19 +1,33 @@
-# React + Vite
+# Food Decision frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Giao diện React/Vite cho Vương quốc Ăn Gì. Gồm bản đồ chọn chế độ, Food Roll,
+Khám phá và chi tiết món, Gợi ý theo khẩu vị, Quyết định nhóm.
 
-Currently, two official plugins are available:
+## Chạy và kiểm tra
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Dùng Node.js 22.12+ hoặc 24. Từ `frontend/`:
 
-## React Compiler
+```powershell
+npm.cmd ci
+npm.cmd run dev
+npm.cmd run lint
+npm.cmd run build
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Vite proxy `/api` tới backend đã cấu hình ở port 3000. Khi host riêng, dùng biến
+cấu hình hiện có VITE_API_BASE_URL. Không commit .env và không chạy seed/migrate
+để kiểm tra giao diện. API adapter `src/api/foods.js` giữ nguyên contract hiện tại.
 
-## Expanding the ESLint configuration
+## Thiết kế và browser QA
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [Design system](../design-system/food-decision/MASTER.md) và
+  [CSS tokens](../design-system/food-decision/tokens.css).
+- [Báo cáo QA và ảnh chụp](../design-system/food-decision/QA.md).
+- `tools/check-ui.cjs` chạy kiểm tra giao diện với Playwright/Chromium đã có sẵn
+  và HTTP giả lập trong browser, không cần backend thật hoặc Atlas. Không cài thêm
+  dependency kiểm thử vào website; xem hướng dẫn cấu hình trong báo cáo QA.
+- Font ngoài có fallback hệ thống. Ảnh chỉ lấy từ imageUrl của API; chưa có ảnh
+  thì hiện fallback SVG. Không tạo dữ liệu món hay ảnh món giả trong ứng dụng.
 
 ## Quy ước Git — Frontend
 
