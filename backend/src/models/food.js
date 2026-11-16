@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const MEALS = ["Breakfast", "Lunch", "Dinner", "Snack"];
-const CATEGORIES = ["noodle-soup", "rice", "fast-food", "hotpot-grill", "street-snack", "other"];
+const { CATEGORIES } = require("../config/foodCategories");
 
 const isInteger = {
     validator: Number.isInteger,

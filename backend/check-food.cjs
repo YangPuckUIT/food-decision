@@ -25,13 +25,14 @@ const cases = [
     ["Fullness sai", { fullness: 0 }, "fullness"],
     ["Meal sai", { meal: ["brunch"] }, "meal"],
     ["Meal rỗng", { meal: [] }, "meal"],
-    ["Giá quá thấp", { price: 19999 }, "price"],
-    ["Giá quá cao", { price: 300001 }, "price"],
+    ["Giá ngoài khoảng budget vẫn hợp lệ", { price: 19999 }, null],
+    ["Duck Confit 350000 hợp lệ", { price: 350000 }, null],
+    ["Giá âm", { price: -1 }, "price"],
     ["Giá số lẻ", { price: 45000.5 }, "price"],
     ["Calories âm", { calories: -1 }, "calories"],
     ["Calories số lẻ", { calories: 450.5 }, "calories"],
     ["Đường dẫn ảnh sai", { imageUrl: "/img/a.jpg" }, "imageUrl"],
-    ["Thiếu ảnh", { imageUrl: undefined }, "imageUrl"]
+    ["Chưa có ảnh dùng mặc định rỗng", { imageUrl: undefined }, null]
 ];
 
 async function main() {

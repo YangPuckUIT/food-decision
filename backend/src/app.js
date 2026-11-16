@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const decisionRoutes = require("./routes/decisionRoutes");
 const foodRoutes = require("./routes/foodRoutes");
+const gachaRoutes = require("./routes/gachaRoutes");
+const ApiError = require("./utils/ApiError");
 
 const app = express();
 
@@ -20,11 +22,15 @@ app.get("/", (req, res) => {
 app.get("/api/health", (req, res) => res.json({ status: "ok" }));
 
 app.use("/api/foods", foodRoutes);
+app.use("/api/gacha", gachaRoutes);
 
 app.use("/api", decisionRoutes);
 app.use((req, res) => res.status(404).json({ error: { code: "ROUTE_NOT_FOUND", message: "Route not found." } }));
 app.use((error, req, res, next) => {
     if (res.headersSent) return next(error);
+    if (error instanceof ApiError) {
+        return res.status(error.status).json({ error: { code: error.code, message: error.message } });
+    }
     const malformed = error.type === "entity.parse.failed";
     const tooLarge = error.type === "entity.too.large";
     res.status(malformed ? 400 : tooLarge ? 413 : 500).json({ error: {
