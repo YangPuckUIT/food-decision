@@ -12,7 +12,7 @@ function CategoryChoices({ title, value, onChange }) {
 }
 
 function Budget({ value, onChange }) {
-  return <label className="field">Ngân sách mỗi người (đ)<input type="number" min="20000" max="300000" step="1" required value={value} onChange={event => onChange(event.target.value)} /><span className="field-hint">Từ 20.000đ đến 300.000đ.</span></label>
+  return <div className="field"><label htmlFor="decision-budget">Ngân sách mỗi người (đ)</label><input id="decision-budget" type="number" min="20000" max="300000" step="1" required value={value} onChange={event => onChange(event.target.value)} aria-describedby="decision-budget-hint" /><span id="decision-budget-hint" className="field-hint">Từ 20.000đ đến 300.000đ.</span></div>
 }
 
 export default function DecisionPanel({ foods, mode }) {
@@ -58,7 +58,7 @@ export default function DecisionPanel({ foods, mode }) {
         {oracle ? <><h2>Khẩu vị của bạn</h2><Budget value={budget} onChange={value => change(() => setBudget(value))} />
           <CategoryChoices title="Loại món yêu thích" value={preferred} onChange={value => change(() => setPreferred(value))} />
           <p className="field-hint category-hint">Không chọn loại nào nghĩa là món nào cũng được.</p>
-          <div className="preference-pair"><label className="field">Độ cay<select value={spicy} onChange={event => change(() => setSpicy(Number(event.target.value)))}><option value="0">Không cay</option><option value="1">Cay vừa</option><option value="2">Cay</option></select></label><label className="field">Độ no<select value={fullness} onChange={event => change(() => setFullness(Number(event.target.value)))}><option value="1">Nhẹ bụng</option><option value="2">Vừa đủ</option><option value="3">No căng</option></select></label></div>
+          <div className="preference-pair"><div className="field"><label htmlFor="preference-spicy">Độ cay</label><select id="preference-spicy" value={spicy} onChange={event => change(() => setSpicy(Number(event.target.value)))}><option value="0">Không cay</option><option value="1">Cay vừa</option><option value="2">Cay</option></select></div><div className="field"><label htmlFor="preference-fullness">Độ no</label><select id="preference-fullness" value={fullness} onChange={event => change(() => setFullness(Number(event.target.value)))}><option value="1">Nhẹ bụng</option><option value="2">Vừa đủ</option><option value="3">No căng</option></select></div></div>
         </> : <>
           <div className="form-step"><span aria-hidden="true">1</span><h2>Gom món cho bàn</h2></div>
           <p id="candidate-count" className="selection-count" role="status">Đã chọn {selected.length} trên 12 món. Cần ít nhất 2 món.</p>

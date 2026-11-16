@@ -38,8 +38,8 @@ export default function Codex({ foods }) {
   return <>
     <form className="filters codex-filters" role="search" onSubmit={event => event.preventDefault()}>
       <label>Tìm món<span className="search-field"><Icon name="search" /><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Tên món bạn muốn tìm" /></span></label>
-      <label>Loại món<select value={category} onChange={event => setCategory(event.target.value)}><option value="">Tất cả loại món</option>{categories.map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></label>
-      <label>Sắp xếp<select value={sort} onChange={event => setSort(event.target.value)}><option value="price-asc">Giá tăng dần</option><option value="price-desc">Giá giảm dần</option><option value="name">Tên A–Z</option></select></label>
+      <div className="field"><label htmlFor="codex-category">Loại món</label><select id="codex-category" value={category} onChange={event => setCategory(event.target.value)}><option value="">Tất cả loại món</option>{categories.map(([key, label]) => <option key={key} value={key}>{label}</option>)}</select></div>
+      <div className="field"><label htmlFor="codex-sort">Sắp xếp</label><select id="codex-sort" value={sort} onChange={event => setSort(event.target.value)}><option value="price-asc">Giá tăng dần</option><option value="price-desc">Giá giảm dần</option><option value="name">Tên A–Z</option></select></div>
     </form>
     <div className="catalog-summary"><p role="status">{visible.length} món trong thực đơn</p>{(query || category || sort !== 'price-asc') && <button type="button" className="text-button" onClick={clearFilters}>Xóa bộ lọc<Icon name="close" /></button>}</div>
     {!visible.length ? <StatusPanel title="Không tìm thấy món">Thử một tên khác hoặc xóa bộ lọc để xem lại thực đơn.</StatusPanel>

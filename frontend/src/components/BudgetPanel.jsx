@@ -13,7 +13,7 @@ export default function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
   return <Dialog title="Ngân sách của bạn" titleId="budget-title" onClose={onCancel} className="budget-panel">
     <form onSubmit={event => { event.preventDefault(); if (valid) { onChange(numeric); onConfirm(numeric) } }}>
       <p className="budget-panel__amount">{draft && Number.isFinite(numeric) ? formatPrice(numeric) : 'Nhập số tiền'}</p>
-      <label className="field" htmlFor="budget-number">Mức chi tối đa (đ)<input autoFocus id="budget-number" type="number" min="20000" max="300000" step="1" required value={draft} onChange={event => setDraft(event.target.value)} aria-describedby="budget-hint" /></label>
+      <label className="field" htmlFor="budget-number">Mức chi tối đa (đ)<input data-autofocus id="budget-number" type="number" min="20000" max="300000" step="1" required value={draft} onChange={event => setDraft(event.target.value)} aria-describedby="budget-hint" /></label>
       <p id="budget-hint" className="field-hint">Từ 20.000đ đến 300.000đ cho một người.</p>
       <label className="budget-panel__range-label" htmlFor="budget-range">Kéo để chọn nhanh</label>
       <input id="budget-range" className="budget-panel__range" type="range" min="20000" max="300000" step="5000" value={valid ? numeric : 20000} onChange={event => setDraft(event.target.value)} />

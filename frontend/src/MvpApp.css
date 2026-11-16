@@ -10,10 +10,10 @@
 .site-header nav { display: flex; flex-wrap: wrap; gap: 4px; }
 .site-header nav button { display: flex; align-items: center; justify-content: center; gap: 8px; background: transparent; border-color: transparent; padding: 10px 14px; color: var(--color-muted); }
 .site-header nav button:hover { background: var(--color-background); color: var(--color-primary); }
-.site-header nav button[aria-current] { background: var(--color-background); color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 600; }
+.site-header nav button[aria-current] { background: var(--color-positive); color: var(--color-primary); border-color: var(--color-rule); border-bottom-color: var(--color-primary); font-weight: 600; }
 .site-header nav .icon { width: 19px; height: 19px; }
-.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 12px 20px; background: var(--color-paper); transform: translateY(-150%); }
-.skip-link:focus { transform: translateY(0); }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; background: var(--color-paper); }
+.skip-link:focus { width: auto; height: auto; padding: 12px 20px; clip-path: none; }
 .site-footer { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 24px 20px; margin-top: auto; border-top: 1px solid var(--color-rule); color: var(--color-muted); font-size: .8rem; }
 .site-footer .icon { width: 18px; height: 18px; }
 .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr)); gap: 24px; margin: 24px 0; }
@@ -30,4 +30,5 @@
 .notice { border-left: 3px solid var(--color-burgundy); background: var(--color-negative); padding: 16px 20px; margin-bottom: 24px; }
 .workspace > h1 { margin-bottom: 32px; }
 @media (max-width: 767px) { .site-header__inner { justify-content: center; gap: 12px; padding: 16px 0 8px; }.site-header nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; gap: 0; }.site-header nav button { flex-direction: column; gap: 5px; padding: 10px 2px; font-size: .75rem; }.filters { grid-template-columns: 1fr 1fr; }.filters label:first-child { grid-column: 1 / -1; } }
+@media (max-width: 479px) { .filters { grid-template-columns: 1fr; } }
 @media (min-width: 1024px) { .page-container, .workspace { padding-top: 48px; }.site-header__inner { padding: 20px 0; } }

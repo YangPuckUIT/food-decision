@@ -4,6 +4,7 @@
 .preference-panel .field-hint { font-weight: 400; margin-top: 0; }
 .decision-form .category-hint { margin-top: -16px; }
 .preference-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 479px) { .preference-pair { grid-template-columns: 1fr; } }
 .decision-submit { width: 100%; margin-top: 8px; }
 .decision-results { min-width: 0; }
 .decision-placeholder { display: flex; align-items: center; justify-content: center; flex-direction: column; min-height: 360px; padding: 48px 24px; text-align: center; border: 1px dashed var(--color-border); border-radius: var(--radius); }
@@ -28,7 +29,8 @@
 .form-step--conditions { border-top: 1px solid var(--color-rule); padding-top: 24px; }
 .selection-count { font-size: .8rem; color: var(--color-muted); margin-top: -12px; }
 .selected-foods { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: -8px 0 0; }
-.selected-foods button { display: flex; align-items: center; gap: 8px; text-align: left; background: var(--color-positive); border-color: var(--color-primary); font-size: .8rem; padding: 8px 10px; }
+.selected-foods li { max-width: 100%; min-width: 0; }
+.selected-foods button { display: flex; align-items: center; gap: 8px; max-width: 100%; overflow-wrap: anywhere; text-align: left; background: var(--color-positive); border-color: var(--color-primary); font-size: .8rem; padding: 8px 10px; }
 .selected-foods .icon { width: 16px; height: 16px; }
 .candidate-list { max-height: 360px; overflow: auto; overscroll-behavior: contain; padding: 4px; margin: -4px; scroll-padding: 8px; grid-template-columns: 1fr; }
 .candidate-list label { padding: 12px 10px; font-size: .875rem; }
@@ -51,6 +53,7 @@
 .eliminated-list li { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--color-rule); font-size: .875rem; }
 .eliminated-list .icon { width: 18px; height: 18px; color: var(--color-burgundy); margin-top: 3px; }
 .eliminated-list li > div { flex: 1; min-width: 0; }
+.eliminated-list strong { overflow-wrap: anywhere; }
 .eliminated-list p { font-size: .8rem; color: var(--color-burgundy); margin-top: 4px; }
 .eliminated-list li > span { color: var(--color-muted); font-size: .8rem; }
 @media (min-width: 768px) { .decision-layout--oracle { grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr); }.decision-layout--group { grid-template-columns: minmax(320px, 1fr) minmax(0, 1fr); } }
