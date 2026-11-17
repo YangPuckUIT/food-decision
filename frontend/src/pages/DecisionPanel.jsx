@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import FoodCard from '../components/FoodCard'
 import Icon from '../components/Icon'
 import Landmark from '../components/Landmark'
 import StatusPanel from '../components/StatusPanel'
+import LoadingSkeleton from '../components/LoadingSkeleton'
 import { getRecommendations, getGroupDecision } from '../api/foods'
 import { categories, formatPrice, reasons, ready, toggle } from '../foodPresentation'
+import useSessionState from '../hooks/useSessionState'
+import { budgetDraft, categoryList, ids, optionalFood, snapshotValid, text } from '../state/session'
 import './DecisionPanel.css'
 
 function CategoryChoices({ title, value, onChange }) {
@@ -16,37 +20,47 @@ function Budget({ value, onChange }) {
 }
 
 export default function DecisionPanel({ foods, mode }) {
-  const [budget, setBudget] = useState(50000)
-  const [preferred, setPreferred] = useState([])
-  const [spicy, setSpicy] = useState(0)
-  const [fullness, setFullness] = useState(2)
-  const [selected, setSelected] = useState([])
-  const [noSpicy, setNoSpicy] = useState(false)
-  const [avoided, setAvoided] = useState([])
-  const [query, setQuery] = useState('')
-  const [result, setResult] = useState(null)
-  const [winner, setWinner] = useState(null)
+  const reduced = useReducedMotion()
+  const [budget, setBudget] = useSessionState(`${mode}:budget`, 50000, budgetDraft)
+  const [preferred, setPreferred] = useSessionState(`${mode}:preferred`, [], categoryList)
+  const [spicy, setSpicy] = useSessionState(`${mode}:spicy`, 0, value => [0, 1, 2].includes(value))
+  const [fullness, setFullness] = useSessionState(`${mode}:fullness`, 2, value => [1, 2, 3].includes(value))
+  const [selected, setSelected] = useSessionState(`${mode}:selected`, [], ids)
+  const [noSpicy, setNoSpicy] = useSessionState(`${mode}:noSpicy`, false, value => typeof value === 'boolean')
+  const [avoided, setAvoided] = useSessionState(`${mode}:avoided`, [], categoryList)
+  const [query, setQuery] = useSessionState(`${mode}:query`, '', text)
+  const [snapshot, setSnapshot] = useSessionState(`${mode}:result`, null, snapshotValid(mode))
+  const [winner, setWinner] = useSessionState(`${mode}:winner`, null, optionalFood)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const lock = useRef(false)
   const active = useRef(true)
-  useEffect(() => { active.current = true; return () => { active.current = false } }, [])
+  const request = useRef(null)
+  useEffect(() => { active.current = true; return () => { active.current = false; request.current?.abort() } }, [])
   const oracle = mode === 'oracle'
   const candidates = foods.filter(ready)
   const visible = candidates.filter(food => food.name.toLocaleLowerCase('vi').includes(query.toLocaleLowerCase('vi')))
 
-  function change(action) { action(); setResult(null); setWinner(null); setError('') }
+  const validSelected = selected.filter(id => candidates.some(food => food._id === id))
+  const input = oracle ? { budget: Number(budget), categories: preferred, spicy, fullness } : { foodIds: validSelected, budget: Number(budget), noSpicy, avoidCategories: avoided }
+  const inputKey = JSON.stringify(input)
+  const result = snapshot?.input === inputKey ? snapshot.data : null
+  const visibleWinner = winner && result?.finalists?.some(food => food._id === winner._id) ? winner : null
+
+  function change(action) { action(); setSnapshot(null); setWinner(null); setError('') }
   async function submit(event) {
     event?.preventDefault()
     if (lock.current) return
     lock.current = true
-    setBusy(true); setError(''); setResult(null); setWinner(null)
+    const controller = new AbortController()
+    request.current = controller
+    setBusy(true); setError(''); setSnapshot(null); setWinner(null)
     const response = oracle
-      ? await getRecommendations({ budget: Number(budget), categories: preferred, spicy, fullness })
-      : await getGroupDecision({ foodIds: selected, budget: Number(budget), noSpicy, avoidCategories: avoided })
+      ? await getRecommendations(input, { signal: controller.signal })
+      : await getGroupDecision(input, { signal: controller.signal })
     if (!active.current) return
     if (response.error) setError(response.error.message)
-    else setResult(response.data)
+    else setSnapshot({ input: inputKey, data: response.data })
     lock.current = false
     setBusy(false)
   }
@@ -62,7 +76,7 @@ export default function DecisionPanel({ foods, mode }) {
         </> : <>
           <div className="form-step"><span aria-hidden="true">1</span><h2>Gom món cho bàn</h2></div>
           <p id="candidate-count" className="selection-count" role="status">Đã chọn {selected.length} trên 12 món. Cần ít nhất 2 món.</p>
-          {!!selected.length && <ul className="selected-foods" aria-label="Món đã chọn">{selected.map(id => { const food = foods.find(item => item._id === id); return <li key={id}><button type="button" aria-label={`Bỏ chọn ${food.name}`} onClick={() => change(() => setSelected(toggle(selected, id)))}>{food.name}<Icon name="close" /></button></li> })}</ul>}
+          {!!selected.length && <ul className="selected-foods" aria-label="Món đã chọn">{selected.map(id => { const food = foods.find(item => item._id === id) || { name: 'Món không còn trong thực đơn' }; return <li key={id}><button type="button" aria-label={`Bỏ chọn ${food.name}`} onClick={() => change(() => setSelected(toggle(selected, id)))}>{food.name}<Icon name="close" /></button></li> })}</ul>}
           <label className="field">Tìm món ứng viên<span className="search-field"><Icon name="search" /><input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Tìm theo tên món" /></span></label>
           <fieldset className="candidate-fieldset"><legend className="sr-only">Chọn từ 2 đến 12 món</legend><div className="candidate-list" aria-describedby="candidate-count">{visible.map(food => <label key={food._id}><input type="checkbox" checked={selected.includes(food._id)} disabled={!selected.includes(food._id) && selected.length >= 12} onChange={() => change(() => setSelected(toggle(selected, food._id)))} /><span className="candidate-name">{food.name}</span><span className="candidate-price">{formatPrice(food.price)}</span></label>)}</div>{!visible.length && <p className="field-hint">Không tìm thấy món. Thử tên khác.</p>}</fieldset>
           <div className="form-step form-step--conditions"><span aria-hidden="true">2</span><h2>Điều kiện chung</h2></div>
@@ -70,10 +84,10 @@ export default function DecisionPanel({ foods, mode }) {
           <label className="check-field"><input type="checkbox" checked={noSpicy} onChange={event => change(() => setNoSpicy(event.target.checked))} /><span>Tránh món cay nhiều<small>Vẫn giữ các món cay vừa.</small></span></label>
           <CategoryChoices title="Loại món cần tránh" value={avoided} onChange={value => change(() => setAvoided(value))} />
         </>}
-        <button className="button button--primary decision-submit" type="submit" disabled={busy || (!oracle && selected.length < 2)}><Icon name={busy ? 'refresh' : oracle ? 'oracle' : 'group'} className={busy ? 'is-loading' : ''} />{busy ? 'Đang lựa chọn' : oracle ? 'Gợi ý cho tôi' : 'Lọc món cho nhóm'}</button>
+        <button className="button button--primary decision-submit" type="submit" disabled={busy || (!oracle && validSelected.length < 2)}><Icon name={busy ? 'refresh' : oracle ? 'oracle' : 'group'} className={busy ? 'is-loading' : ''} />{busy ? 'Đang lựa chọn' : oracle ? 'Gợi ý cho tôi' : 'Lọc món cho nhóm'}</button>
       </fieldset></form>
-      <section className="decision-results" aria-label={oracle ? 'Kết quả gợi ý' : 'Kết quả nhóm'} aria-live="polite" aria-busy={busy}>
-        {busy ? <StatusPanel kind="loading" title={oracle ? 'Đang tìm món hợp khẩu vị' : 'Đang xem điều kiện của nhóm'}>Chờ một chút để nhận kết quả.</StatusPanel>
+      <motion.section layout="position" animate={{ opacity: busy ? .7 : 1 }} transition={{ duration: reduced ? 0 : .16 }} className="decision-results" aria-label={oracle ? 'Kết quả gợi ý' : 'Kết quả nhóm'} aria-live="polite" aria-busy={busy}>
+        {busy ? <LoadingSkeleton kind="decision" title={oracle ? 'Đang tìm món hợp khẩu vị' : 'Đang xem điều kiện của nhóm'} />
           : error ? <StatusPanel kind="error" title="Chưa nhận được kết quả" onRetry={() => submit()}>{error}</StatusPanel>
             : result === null ? <div className="decision-placeholder"><Landmark name={mode} /><h2>{oracle ? 'Gợi ý dành cho bạn' : 'Những món vào vòng cuối'}</h2><p>{oracle ? 'Chọn khẩu vị rồi nhấn Gợi ý cho tôi.' : 'Gom món và đặt điều kiện để tìm lựa chọn chung.'}</p></div>
               : oracle ? <>
@@ -82,10 +96,10 @@ export default function DecisionPanel({ foods, mode }) {
               </> : <>
                 <div className="section-heading"><h2>{result.finalists.length} món vào vòng cuối</h2><p>Xem kết quả theo điều kiện đã chọn</p></div>
                 {!result.finalists.length ? <StatusPanel title="Chưa có lựa chọn chung">Không có món qua bộ lọc. Hãy đổi lựa chọn hoặc ngân sách.</StatusPanel> : <><div className="food-grid finalist-grid">{result.finalists.map(food => <FoodCard key={food._id} food={food} />)}</div><button type="button" className="button button--primary" onClick={() => setWinner(result.finalists[Math.floor(Math.random() * result.finalists.length)])}><Icon name="star" />Chọn ngẫu nhiên trong vòng cuối</button></>}
-                {winner && <div className="group-winner"><Icon name="check" /><div><p>Cả nhóm ăn</p><h3>{winner.name}</h3><strong>{formatPrice(winner.price)}</strong></div></div>}
+                {visibleWinner && <div className="group-winner"><Icon name="check" /><div><p>Cả nhóm ăn</p><h3>{visibleWinner.name}</h3><strong>{formatPrice(visibleWinner.price)}</strong></div></div>}
                 <div className="eliminated-section"><h3>Món đã loại ({result.eliminated.length})</h3>{result.eliminated.length ? <ul className="eliminated-list">{result.eliminated.map(item => <li key={item.food._id}><Icon name="close" /><div><strong>{item.food.name}</strong><p>{reasons[item.reason] || item.reason}</p></div><span>{formatPrice(item.food.price)}</span></li>)}</ul> : <p className="field-hint">Tất cả món đã chọn đều phù hợp.</p>}</div>
               </>}
-      </section>
+      </motion.section>
     </div>
   </>
 }

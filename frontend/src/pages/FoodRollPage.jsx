@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import BudgetPanel from '../components/BudgetPanel'
 import FoodCard from '../components/FoodCard'
 import PageHeading from '../components/PageHeading'
@@ -7,12 +6,14 @@ import Landmark from '../components/Landmark'
 import Icon from '../components/Icon'
 import FoodRollOverlay from '../components/FoodRollOverlay'
 import useFoodRoll from '../hooks/useFoodRoll'
+import useSessionState from '../hooks/useSessionState'
+import { budgetDraft } from '../state/session'
 import { formatPrice } from '../foodPresentation'
 import './FoodRollPage.css'
 
 export default function FoodRollPage({ onHome }) {
   const { status, setStatus, food, error, overlayOpen, skipped, runId, inFlight, roll, skip, finishAnimation, closeOverlay } = useFoodRoll()
-  const [budget, setBudget] = useState(50000)
+  const [budget, setBudget] = useSessionState('roll:budget', 50000, budgetDraft)
   const rollFood = (nextBudget = budget) => roll(nextBudget)
 
   const showResult = food && (status === 'result' || status === 'budget')

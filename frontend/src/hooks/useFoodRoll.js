@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import useSessionState from './useSessionState'
+import { optionalFood, readSession } from '../state/session'
 import { getRandomFood } from '../api/foods'
 
 export default function useFoodRoll() {
-  const [status, setStatus] = useState('idle')
-  const [food, setFood] = useState(null)
+  const [status, setStatus] = useState(() => readSession('roll:food', null, optionalFood) ? 'result' : 'idle')
+  const [food, setFood] = useSessionState('roll:food', null, optionalFood)
   const [error, setError] = useState('')
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [skipped, setSkipped] = useState(false)
@@ -12,7 +14,7 @@ export default function useFoodRoll() {
   const active = useRef(false)
   useEffect(() => {
     active.current = true
-    return () => { active.current = false; session.current = null }
+    return () => { active.current = false; session.current?.controller.abort(); session.current = null }
   }, [])
 
   function publish(current) {
@@ -35,11 +37,11 @@ export default function useFoodRoll() {
   function closeOverlay() { finishAnimation(); setOverlayOpen(false) }
   async function roll(budget) {
     if (!active.current || (session.current && (!session.current.response || !session.current.animationDone))) return
-    const current = { response: null, animationDone: false }
+    const current = { response: null, animationDone: false, controller: new AbortController() }
     session.current = current
     setRunId(value => value + 1)
     setFood(null); setError(''); setSkipped(false); setStatus('rolling'); setOverlayOpen(true)
-    const response = await getRandomFood(budget)
+    const response = await getRandomFood(budget, { signal: current.controller.signal })
     if (!active.current || session.current !== current) return
     current.response = response
     if (!response.data) current.animationDone = true

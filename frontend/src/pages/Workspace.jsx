@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getFoods } from '../api/foods'
 import PageHeading from '../components/PageHeading'
 import StatusPanel from '../components/StatusPanel'
+import LoadingSkeleton from '../components/LoadingSkeleton'
 import Codex from './Codex'
 import DecisionPanel from './DecisionPanel'
 
@@ -18,19 +19,20 @@ export default function Workspace({ mode, onHome }) {
   const [reload, setReload] = useState(0)
   useEffect(() => {
     let active = true
-    getFoods().then(response => {
+    const controller = new AbortController()
+    getFoods({ signal: controller.signal }).then(response => {
       if (!active) return
       if (response.error) setError(response.error.message)
       else setFoods(response.data)
       setLoading(false)
     })
-    return () => { active = false }
+    return () => { active = false; controller.abort() }
   }, [reload])
   function retry() { setLoading(true); setError(''); setReload(value => value + 1) }
   const [place, title, description] = headings[mode]
   return <main id="main-content" className="workspace">
     <PageHeading place={place} title={title} description={description} onHome={onHome} />
-    {loading ? <StatusPanel kind="loading" title="Đang tải thực đơn" />
+    {loading ? <LoadingSkeleton title="Đang tải thực đơn" />
       : error ? <StatusPanel kind="error" title="Chưa tải được thực đơn" onRetry={retry}>{error}</StatusPanel>
         : !foods.length ? <StatusPanel title="Thực đơn đang được cập nhật" onRetry={retry}>Chưa có món để lựa chọn. Bạn có thể tải lại sau.</StatusPanel>
           : mode === 'codex' ? <Codex foods={foods} /> : <DecisionPanel foods={foods} mode={mode} />}
