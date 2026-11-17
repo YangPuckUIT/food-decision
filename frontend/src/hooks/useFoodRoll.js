@@ -7,6 +7,7 @@ export default function useFoodRoll() {
   const [status, setStatus] = useState(() => readSession('roll:food', null, optionalFood) ? 'result' : 'idle')
   const [food, setFood] = useSessionState('roll:food', null, optionalFood)
   const [error, setError] = useState('')
+  const [restored, setRestored] = useState(() => Boolean(readSession('roll:food', null, optionalFood)))
   const [overlayOpen, setOverlayOpen] = useState(false)
   const [skipped, setSkipped] = useState(false)
   const [runId, setRunId] = useState(0)
@@ -40,7 +41,7 @@ export default function useFoodRoll() {
     const current = { response: null, animationDone: false, controller: new AbortController() }
     session.current = current
     setRunId(value => value + 1)
-    setFood(null); setError(''); setSkipped(false); setStatus('rolling'); setOverlayOpen(true)
+    setRestored(false); setFood(null); setError(''); setSkipped(false); setStatus('rolling'); setOverlayOpen(true)
     const response = await getRandomFood(budget, { signal: current.controller.signal })
     if (!active.current || session.current !== current) return
     current.response = response
@@ -48,5 +49,5 @@ export default function useFoodRoll() {
     publish(current)
   }
   const inFlight = status === 'rolling' || status === 'waiting'
-  return { status, setStatus, food, error, overlayOpen, skipped, runId, inFlight, roll, skip, finishAnimation, closeOverlay }
+  return { status, setStatus, restored, food, error, overlayOpen, skipped, runId, inFlight, roll, skip, finishAnimation, closeOverlay }
 }

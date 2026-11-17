@@ -12,7 +12,7 @@ import { formatPrice } from '../foodPresentation'
 import './FoodRollPage.css'
 
 export default function FoodRollPage({ onHome }) {
-  const { status, setStatus, food, error, overlayOpen, skipped, runId, inFlight, roll, skip, finishAnimation, closeOverlay } = useFoodRoll()
+  const { status, setStatus, restored, food, error, overlayOpen, skipped, runId, inFlight, roll, skip, finishAnimation, closeOverlay } = useFoodRoll()
   const [budget, setBudget] = useSessionState('roll:budget', 50000, budgetDraft)
   const rollFood = (nextBudget = budget) => roll(nextBudget)
 
@@ -29,7 +29,7 @@ export default function FoodRollPage({ onHome }) {
         {inFlight && !overlayOpen && <StatusPanel title="Đang tìm món">Yêu cầu đang được xử lý.</StatusPanel>}
         {status === 'error' && !overlayOpen && <><StatusPanel kind="error" title="Chưa thể chọn món" onRetry={() => rollFood()}>{error}</StatusPanel><button type="button" className="text-button" onClick={() => setStatus('budget')}>Đổi ngân sách</button></>}
         {status === 'empty' && !overlayOpen && <StatusPanel title="Chưa có món trong ngân sách"><p>Không tìm thấy món có giá tối đa {formatPrice(budget)}.</p><button type="button" className="button button--primary" onClick={() => setStatus('budget')}>Tăng ngân sách</button></StatusPanel>}
-        {showResult && !overlayOpen && <div className="roll-result" data-roll-outcome><div className="result-heading"><Icon name="check" /><h2>Món được chọn</h2></div><FoodCard key={food._id} food={food}>{food.description && <p className="roll-result__description">{food.description}</p>}</FoodCard><div className="food-roll__actions"><button type="button" className="button button--primary" onClick={() => rollFood()}><Icon name="refresh" />Roll lại</button><button type="button" className="button button--secondary" onClick={() => setStatus('budget')}>Đổi ngân sách</button></div></div>}
+        {showResult && !overlayOpen && <div className="roll-result" data-roll-outcome>{restored && <p className="restored-note">Kết quả lần trước. Bạn có thể Roll lại.</p>}<div className="result-heading"><Icon name="check" /><h2>Món được chọn</h2></div><FoodCard key={food._id} food={food}>{food.description && <p className="roll-result__description">{food.description}</p>}</FoodCard><div className="food-roll__actions"><button type="button" className="button button--primary" onClick={() => rollFood()}><Icon name="refresh" />Roll lại</button><button type="button" className="button button--secondary" onClick={() => setStatus('budget')}>Đổi ngân sách</button></div></div>}
       </section>
     </div>
     {status === 'budget' && <BudgetPanel budget={budget} onChange={setBudget} onCancel={() => setStatus(food ? 'result' : 'idle')} onConfirm={rollFood} />}

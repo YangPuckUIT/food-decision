@@ -30,7 +30,8 @@ let browser;
   const overlay = () => page.locator('dialog.roll-overlay');
   const card = () => overlay().locator('.food-card');
   const start = async () => {
-    await page.getByRole('button', { name: 'Chọn ngân sách và roll', exact: true }).click();
+    if (await page.getByRole('button', { name: 'Chọn ngân sách và roll', exact: true }).isVisible()) await page.getByRole('button', { name: 'Chọn ngân sách và roll', exact: true }).click();
+    else await page.getByRole('button', { name: 'Đổi ngân sách', exact: true }).first().click();
     await page.getByLabel('Mức chi tối đa (đ)', { exact: true }).fill('45001');
     await page.getByRole('button', { name: 'Gọi sao băng', exact: true }).click();
     await overlay().waitFor();

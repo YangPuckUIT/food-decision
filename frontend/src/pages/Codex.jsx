@@ -57,6 +57,7 @@ export default function Codex({ foods }) {
   function showDetail(id) { updateRoute({ food: id }) }
   function closeDetail() { invalidate(); updateRoute({ food: null }, { replace: true }) }
   function clearFilters() { saveQuery(''); saveCategory(''); saveSort('price-asc'); updateFilters({ q: '', category: '', sort: 'price-asc' }) }
+  const currentDetail = detail?._id === detailId ? detail : null
   const visible = foods.filter(food => food.name.toLocaleLowerCase('vi').includes(query.toLocaleLowerCase('vi')) && (!category || food.category === category))
     .sort((a, b) => sort === 'name' ? a.name.localeCompare(b.name, 'vi') : sort === 'price-desc' ? b.price - a.price : a.price - b.price)
 
@@ -69,13 +70,13 @@ export default function Codex({ foods }) {
     <div className="catalog-summary"><p role="status">{visible.length} món trong thực đơn</p>{(query || category || sort !== 'price-asc') && <button type="button" className="text-button" onClick={clearFilters}>Xóa bộ lọc<Icon name="close" /></button>}</div>
     {!visible.length ? <StatusPanel title="Không tìm thấy món">Thử một tên khác hoặc xóa bộ lọc để xem lại thực đơn.</StatusPanel>
       : <div className="food-grid codex-grid">{visible.map(food => <FoodCard key={food._id} food={food}><button type="button" className="text-button" aria-label={`Chi tiết ${food.name}`} onClick={() => showDetail(food._id)}>Xem chi tiết<Icon name="arrow" /></button></FoodCard>)}</div>}
-    {detailId && <Dialog title={detail?.name || 'Chi tiết món'} titleId="food-detail-title" onClose={closeDetail} className="food-detail">
+    {detailId && <Dialog title={currentDetail?.name || 'Chi tiết món'} titleId="food-detail-title" onClose={closeDetail} className="food-detail">
       {loading && <LoadingSkeleton kind="detail" title="Đang mở sổ món" />}
       {error && <StatusPanel kind="error" title="Chưa tải được chi tiết" onRetry={() => fetchDetail(detailId)}>{error}</StatusPanel>}
-      {detail && <div className="food-detail__content"><FoodImage food={detail} /><div className="food-detail__summary"><p className="eyebrow">{categoryLabel(detail.category)}</p><strong>{formatPrice(detail.price)}</strong></div><p className="food-detail__description">{detail.description}</p>
-        <dl className="food-facts"><div><dt>Ẩm thực</dt><dd>{detail.cuisine || 'Chưa có thông tin'}</dd></div><div><dt>Năng lượng</dt><dd>{detail.calories == null ? 'Chưa có thông tin' : `${detail.calories} kcal`}</dd></div><div><dt>Độ cay</dt><dd>{['Không cay', 'Cay vừa', 'Cay'][detail.spicy] || 'Chưa có thông tin'}</dd></div><div><dt>Độ no</dt><dd>{['', 'Nhẹ bụng', 'Vừa đủ', 'No căng'][detail.fullness] || 'Chưa có thông tin'}</dd></div></dl>
-        {!!detail.meal?.length && <p className="food-detail__meta"><strong>Bữa ăn: </strong>{detail.meal.map(value => meals[value] || value).join(', ')}</p>}
-        {!!detail.tags?.length && <p className="food-detail__meta"><strong>Đặc điểm: </strong>{detail.tags.join(', ')}</p>}
+      {currentDetail && <div className="food-detail__content"><FoodImage food={currentDetail} /><div className="food-detail__summary"><p className="eyebrow">{categoryLabel(currentDetail.category)}</p><strong>{formatPrice(currentDetail.price)}</strong></div><p className="food-detail__description">{currentDetail.description}</p>
+        <dl className="food-facts"><div><dt>Ẩm thực</dt><dd>{currentDetail.cuisine || 'Chưa có thông tin'}</dd></div><div><dt>Năng lượng</dt><dd>{currentDetail.calories == null ? 'Chưa có thông tin' : `${currentDetail.calories} kcal`}</dd></div><div><dt>Độ cay</dt><dd>{['Không cay', 'Cay vừa', 'Cay'][currentDetail.spicy] || 'Chưa có thông tin'}</dd></div><div><dt>Độ no</dt><dd>{['', 'Nhẹ bụng', 'Vừa đủ', 'No căng'][currentDetail.fullness] || 'Chưa có thông tin'}</dd></div></dl>
+        {!!currentDetail.meal?.length && <p className="food-detail__meta"><strong>Bữa ăn: </strong>{currentDetail.meal.map(value => meals[value] || value).join(', ')}</p>}
+        {!!currentDetail.tags?.length && <p className="food-detail__meta"><strong>Đặc điểm: </strong>{currentDetail.tags.join(', ')}</p>}
       </div>}
       <button type="button" className="text-button food-detail__back" onClick={closeDetail}><Icon name="back" />Quay lại danh sách</button>
     </Dialog>}

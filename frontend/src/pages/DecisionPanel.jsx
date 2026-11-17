@@ -8,7 +8,7 @@ import LoadingSkeleton from '../components/LoadingSkeleton'
 import { getRecommendations, getGroupDecision } from '../api/foods'
 import { categories, formatPrice, reasons, ready, toggle } from '../foodPresentation'
 import useSessionState from '../hooks/useSessionState'
-import { budgetDraft, categoryList, ids, optionalFood, snapshotValid, text } from '../state/session'
+import { budgetDraft, categoryList, ids, optionalFood, snapshotValid, text, readSession } from '../state/session'
 import './DecisionPanel.css'
 
 function CategoryChoices({ title, value, onChange }) {
@@ -31,6 +31,7 @@ export default function DecisionPanel({ foods, mode }) {
   const [query, setQuery] = useSessionState(`${mode}:query`, '', text)
   const [snapshot, setSnapshot] = useSessionState(`${mode}:result`, null, snapshotValid(mode))
   const [winner, setWinner] = useSessionState(`${mode}:winner`, null, optionalFood)
+  const [restored, setRestored] = useState(() => Boolean(readSession(`${mode}:result`, null, snapshotValid(mode))))
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
   const lock = useRef(false)
@@ -47,14 +48,14 @@ export default function DecisionPanel({ foods, mode }) {
   const result = snapshot?.input === inputKey ? snapshot.data : null
   const visibleWinner = winner && result?.finalists?.some(food => food._id === winner._id) ? winner : null
 
-  function change(action) { action(); setSnapshot(null); setWinner(null); setError('') }
+  function change(action) { action(); setRestored(false); setSnapshot(null); setWinner(null); setError('') }
   async function submit(event) {
     event?.preventDefault()
     if (lock.current) return
     lock.current = true
     const controller = new AbortController()
     request.current = controller
-    setBusy(true); setError(''); setSnapshot(null); setWinner(null)
+    setRestored(false); setBusy(true); setError(''); setSnapshot(null); setWinner(null)
     const response = oracle
       ? await getRecommendations(input, { signal: controller.signal })
       : await getGroupDecision(input, { signal: controller.signal })
@@ -87,6 +88,7 @@ export default function DecisionPanel({ foods, mode }) {
         <button className="button button--primary decision-submit" type="submit" disabled={busy || (!oracle && validSelected.length < 2)}><Icon name={busy ? 'refresh' : oracle ? 'oracle' : 'group'} className={busy ? 'is-loading' : ''} />{busy ? 'Đang lựa chọn' : oracle ? 'Gợi ý cho tôi' : 'Lọc món cho nhóm'}</button>
       </fieldset></form>
       <motion.section layout="position" animate={{ opacity: busy ? .7 : 1 }} transition={{ duration: reduced ? 0 : .16 }} className="decision-results" aria-label={oracle ? 'Kết quả gợi ý' : 'Kết quả nhóm'} aria-live="polite" aria-busy={busy}>
+        {restored && result !== null && <p className="restored-note">Kết quả lần trước. Bạn có thể chọn lại.</p>}
         {busy ? <LoadingSkeleton kind="decision" title={oracle ? 'Đang tìm món hợp khẩu vị' : 'Đang xem điều kiện của nhóm'} />
           : error ? <StatusPanel kind="error" title="Chưa nhận được kết quả" onRetry={() => submit()}>{error}</StatusPanel>
             : result === null ? <div className="decision-placeholder"><Landmark name={mode} /><h2>{oracle ? 'Gợi ý dành cho bạn' : 'Những món vào vòng cuối'}</h2><p>{oracle ? 'Chọn khẩu vị rồi nhấn Gợi ý cho tôi.' : 'Gom món và đặt điều kiện để tìm lựa chọn chung.'}</p></div>
