@@ -1,111 +1,46 @@
 import { useRef, useState } from 'react'
 import BudgetPanel from '../components/BudgetPanel'
 import FoodCard from '../components/FoodCard'
+import PageHeading from '../components/PageHeading'
+import StatusPanel from '../components/StatusPanel'
+import Landmark from '../components/Landmark'
+import Icon from '../components/Icon'
+import { formatPrice } from '../foodPresentation'
 import { getRandomFood } from '../api/foods'
 import './FoodRollPage.css'
 
-const DEFAULT_BUDGET = 50000
-
-function FoodRollPage() {
-  // idle | budget | rolling | result | empty | error
+export default function FoodRollPage({ onHome }) {
   const [status, setStatus] = useState('idle')
-
-  // Ngân sách giữ ở đây (component cha), không giữ trong BudgetPanel
-  const [budget, setBudget] = useState(DEFAULT_BUDGET)
-
-  // Món vừa roll được; null khi chưa có
+  const [budget, setBudget] = useState(50000)
   const [food, setFood] = useState(null)
   const [error, setError] = useState('')
   const busy = useRef(false)
 
-  // Gọi API random với ngân sách hiện tại rồi chuyển trạng thái
-  async function rollFood() {
+  async function rollFood(nextBudget = budget) {
     if (busy.current) return
     busy.current = true
     setStatus('rolling')
     setError('')
-    const response = await getRandomFood(budget)
+    const response = await getRandomFood(nextBudget)
     busy.current = false
-
-    if (response.data) {
-      setFood(response.data)
-      setStatus('result')
-    } else if (response.error.code === 'FOOD_NOT_FOUND') {
-      setFood(null)
-      setStatus('empty')
-    } else {
-      setError(response.error.message)
-      setStatus('error')
-    }
+    if (response.data) { setFood(response.data); setStatus('result') }
+    else if (response.error.code === 'FOOD_NOT_FOUND') { setFood(null); setStatus('empty') }
+    else { setError(response.error.message); setStatus('error') }
   }
 
-  const formattedBudget = budget.toLocaleString('vi-VN') + 'đ'
-
-  return (
-    <main className="food-roll">
-      {status === 'rolling' && <p role="status">Đang gọi sao băng…</p>}
-      {status === 'error' && <section><p role="alert">{error}</p><button type="button" onClick={() => setStatus('budget')}>Thử lại</button></section>}
-      {status === 'result' && (
-        <>
-          <FoodCard key={food._id} food={food} />
-          <div className="food-roll__actions">
-            <button
-              type="button"
-              className="food-roll__button"
-              onClick={rollFood}
-            >
-              Roll lại
-            </button>
-            <button
-              type="button"
-              className="food-roll__button food-roll__button--secondary"
-              onClick={() => setStatus('budget')}
-            >
-              Đổi ngân sách
-            </button>
-          </div>
-        </>
-      )}
-
-      {status === 'empty' && (
-        <>
-          <h2 className="food-roll__title">Sao băng chưa tìm thấy món nào</h2>
-          <p className="food-roll__message">
-            Không có món nào dưới {formattedBudget}. Thử tăng ngân sách nhé.
-          </p>
-          <button
-            type="button"
-            className="food-roll__button"
-            onClick={() => setStatus('budget')}
-          >
-            Tăng ngân sách
-          </button>
-        </>
-      )}
-
-      {(status === 'idle' || status === 'budget') && (
-        <>
-          <h1 className="food-roll__title">Hôm nay ăn gì?</h1>
-          <button
-            type="button"
-            className="food-roll__button"
-            onClick={() => setStatus('budget')}
-          >
-            Roll
-          </button>
-        </>
-      )}
-
-      {status === 'budget' && (
-        <BudgetPanel
-          budget={budget}
-          onChange={setBudget}
-          onCancel={() => setStatus(food ? 'result' : 'idle')}
-          onConfirm={rollFood}
-        />
-      )}
-    </main>
-  )
+  const showResult = food && (status === 'result' || status === 'budget')
+  return <main id="main-content" className="food-roll page-container">
+    <PageHeading place="Tháp Sao Băng" title="Để vận may chọn món" description="Đặt mức chi tối đa. Sao băng sẽ chọn một món trong ngân sách." onHome={onHome} />
+    <div className="roll-layout">
+      <aside className="roll-budget"><Landmark name="roll" /><h2>Ngân sách mỗi người</h2><p className="roll-budget__amount">{formatPrice(budget)}</p><p>Giá món được chọn sẽ không vượt mức này.</p>{status !== 'rolling' && <button type="button" className="text-button" onClick={() => setStatus('budget')}><Icon name="coin" />Đổi ngân sách</button>}</aside>
+      <section className="roll-stage" aria-label="Kết quả Food Roll" aria-busy={status === 'rolling'}>
+        {(status === 'idle' || (status === 'budget' && !food)) && <div className="roll-intro"><Icon name="star" /><h2>Sẵn sàng tìm món?</h2><p>Chọn ngân sách rồi thử vận may của bạn.</p><button type="button" className="button button--primary" onClick={() => setStatus('budget')}><Icon name="star" />Chọn ngân sách và roll</button></div>}
+        {status === 'rolling' && <StatusPanel kind="loading" title="Đang gọi sao băng">Đang tìm một món trong ngân sách của bạn.</StatusPanel>}
+        {status === 'error' && <><StatusPanel kind="error" title="Chưa thể chọn món" onRetry={() => rollFood()}>{error}</StatusPanel><button type="button" className="text-button" onClick={() => setStatus('budget')}>Đổi ngân sách</button></>}
+        {status === 'empty' && <StatusPanel title="Chưa có món trong ngân sách"><p>Không tìm thấy món có giá tối đa {formatPrice(budget)}.</p><button type="button" className="button button--primary" onClick={() => setStatus('budget')}>Tăng ngân sách</button></StatusPanel>}
+        {showResult && <div className="roll-result" aria-live="polite"><div className="result-heading"><Icon name="check" /><h2>Món được chọn</h2></div><FoodCard key={food._id} food={food}>{food.description && <p className="roll-result__description">{food.description}</p>}</FoodCard><div className="food-roll__actions"><button type="button" className="button button--primary" onClick={() => rollFood()}><Icon name="refresh" />Roll lại</button><button type="button" className="button button--secondary" onClick={() => setStatus('budget')}>Đổi ngân sách</button></div></div>}
+      </section>
+    </div>
+    {status === 'budget' && <BudgetPanel budget={budget} onChange={setBudget} onCancel={() => setStatus(food ? 'result' : 'idle')} onConfirm={rollFood} />}
+  </main>
 }
-
-export default FoodRollPage

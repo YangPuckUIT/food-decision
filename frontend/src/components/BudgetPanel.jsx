@@ -1,87 +1,25 @@
+import { useState } from 'react'
+import Dialog from './Dialog'
+import Icon from './Icon'
+import { formatPrice } from '../foodPresentation'
 import './BudgetPanel.css'
 
-// Các mức ngân sách chọn nhanh (VND)
 const PRESETS = [30000, 50000, 100000, 200000]
 
-// 50000 -> "50.000đ"
-function formatPrice(value) {
-  return value.toLocaleString('vi-VN') + 'đ'
+export default function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
+  const [draft, setDraft] = useState(String(budget))
+  const numeric = Number(draft)
+  const valid = Number.isInteger(numeric) && numeric >= 20000 && numeric <= 300000
+  return <Dialog title="Ngân sách của bạn" titleId="budget-title" onClose={onCancel} className="budget-panel">
+    <form onSubmit={event => { event.preventDefault(); if (valid) { onChange(numeric); onConfirm(numeric) } }}>
+      <p className="budget-panel__amount">{draft && Number.isFinite(numeric) ? formatPrice(numeric) : 'Nhập số tiền'}</p>
+      <label className="field" htmlFor="budget-number">Mức chi tối đa (đ)<input data-autofocus id="budget-number" type="number" min="20000" max="300000" step="1" required value={draft} onChange={event => setDraft(event.target.value)} aria-describedby="budget-hint" /></label>
+      <p id="budget-hint" className="field-hint">Từ 20.000đ đến 300.000đ cho một người.</p>
+      <label className="budget-panel__range-label" htmlFor="budget-range">Kéo để chọn nhanh</label>
+      <input id="budget-range" className="budget-panel__range" type="range" min="20000" max="300000" step="5000" value={valid ? numeric : 20000} onChange={event => setDraft(event.target.value)} />
+      <div className="budget-panel__range-labels" aria-hidden="true"><span>20.000đ</span><span>300.000đ</span></div>
+      <div className="budget-panel__presets" aria-label="Mức ngân sách chọn nhanh">{PRESETS.map(value => <button type="button" key={value} aria-pressed={numeric === value} onClick={() => setDraft(String(value))}>{value / 1000}k</button>)}</div>
+      <div className="budget-panel__actions"><button type="button" className="button button--secondary" onClick={onCancel}>Huỷ</button><button type="submit" className="button button--primary"><Icon name="star" />Gọi sao băng</button></div>
+    </form>
+  </Dialog>
 }
-
-// 50000 -> "50k"
-function formatShort(value) {
-  return value / 1000 + 'k'
-}
-
-// Component "không giữ state": budget do FoodRollPage giữ,
-// BudgetPanel chỉ hiển thị và báo ngược lên qua các hàm onXxx.
-function BudgetPanel({ budget, onChange, onCancel, onConfirm }) {
-  return (
-    <div className="budget-overlay">
-      <section
-        className="budget-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="budget-title"
-      >
-        <h2 id="budget-title" className="budget-panel__title">
-          Ngân sách của bạn
-        </h2>
-
-        <p className="budget-panel__amount">{formatPrice(budget)}</p>
-
-        <label className="budget-panel__label" htmlFor="budget-range">
-          Kéo để chọn mức giá tối đa
-        </label>
-        <input
-          id="budget-range"
-          className="budget-panel__range"
-          type="range"
-          min="20000"
-          max="300000"
-          step="5000"
-          value={budget}
-          // value của input luôn là string -> đổi sang number trước khi báo lên
-          onChange={(event) => onChange(Number(event.target.value))}
-        />
-
-        <div className="budget-panel__presets">
-          {PRESETS.map((preset) => (
-            <button
-              key={preset}
-              type="button"
-              className={
-                preset === budget
-                  ? 'budget-panel__preset budget-panel__preset--active'
-                  : 'budget-panel__preset'
-              }
-              aria-pressed={preset === budget}
-              onClick={() => onChange(preset)}
-            >
-              {formatShort(preset)}
-            </button>
-          ))}
-        </div>
-
-        <div className="budget-panel__actions">
-          <button
-            type="button"
-            className="budget-panel__button"
-            onClick={onCancel}
-          >
-            Huỷ
-          </button>
-          <button
-            type="button"
-            className="budget-panel__button budget-panel__button--primary"
-            onClick={onConfirm}
-          >
-            Gọi sao băng
-          </button>
-        </div>
-      </section>
-    </div>
-  )
-}
-
-export default BudgetPanel
