@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Icon from './Icon'
+import { motion, useReducedMotion } from 'motion/react'
 
 export default function Dialog({ title, titleId, onClose, className = '', children }) {
   const ref = useRef(null)
+  const [closing, setClosing] = useState(false)
+  const reduced = useReducedMotion()
   useEffect(() => {
     const dialog = ref.current
     const previousFocus = document.activeElement
@@ -27,8 +30,8 @@ export default function Dialog({ title, titleId, onClose, className = '', childr
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
   }
 
-  return <dialog ref={ref} className={`dialog ${className}`} aria-labelledby={titleId} onKeyDown={containFocus} onCancel={event => { event.preventDefault(); onClose() }}>
-    <div className="dialog-heading"><h2 id={titleId}>{title}</h2><button type="button" className="icon-button" aria-label="Đóng" onClick={onClose}><Icon name="close" /></button></div>
+  return <motion.dialog ref={ref} initial={{ opacity: 0, scale: reduced ? 1 : .985 }} animate={{ opacity: closing ? 0 : 1, scale: reduced ? 1 : closing ? .985 : 1 }} transition={{ duration: reduced ? 0 : closing ? .1 : .18 }} onAnimationComplete={() => { if (closing) onClose() }} className={`dialog ${className}`} aria-labelledby={titleId} onKeyDown={containFocus} onCancel={event => { event.preventDefault(); setClosing(true) }}>
+    <div className="dialog-heading"><h2 id={titleId}>{title}</h2><button type="button" className="icon-button" aria-label="Đóng" onClick={() => setClosing(true)}><Icon name="close" /></button></div>
     {children}
-  </dialog>
+  </motion.dialog>
 }
