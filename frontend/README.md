@@ -22,12 +22,25 @@ cấu hình hiện có VITE_API_BASE_URL. Không commit .env và không chạy s
 
 - [Design system](../design-system/food-decision/MASTER.md) và
   [CSS tokens](../design-system/food-decision/tokens.css).
+- [Hướng thiết kế storybook](../design-system/food-decision/STORYBOOK.md) và
+  [QA mới nhất](../design-system/food-decision/STORYBOOK-QA.md), gồm ảnh chụp,
+  kiểm tra khôi phục trạng thái và các giới hạn xác minh.
 - [Báo cáo QA và ảnh chụp](../design-system/food-decision/QA.md).
 - `tools/check-ui.cjs` chạy kiểm tra giao diện với Playwright/Chromium đã có sẵn
   và HTTP giả lập trong browser, không cần backend thật hoặc Atlas. Không cài thêm
   dependency kiểm thử vào website; xem hướng dẫn cấu hình trong báo cáo QA.
 - Font ngoài có fallback hệ thống. Ảnh chỉ lấy từ imageUrl của API; chưa có ảnh
   thì hiện fallback SVG. Không tạo dữ liệu món hay ảnh món giả trong ứng dụng.
+
+URL lưu trang hiện tại, bộ lọc Khám phá và ID chi tiết món. Session storage có
+version và hạn 24 giờ lưu bản nháp cùng kết quả API hợp lệ trong tab hiện tại.
+Refresh không khôi phục request/loading; đổi tiêu chí sẽ bỏ kết quả cũ. Storage
+bị chặn hoặc dữ liệu không hợp lệ không ngăn người dùng tiếp tục thao tác.
+
+Ngoài `tools/check-ui.cjs`, có `tools/check-roll-animation.cjs` cho overlay/Skip
+và `tools/check-restoration.cjs` cho URL, refresh, storage và timeout. Chạy bằng
+Node với cùng cấu hình browser có sẵn trong báo cáo QA. Adapter giữ nguyên API
+contract, bổ sung AbortController và timeout 15 giây cho request phía client.
 
 ## Quy ước Git — Frontend
 

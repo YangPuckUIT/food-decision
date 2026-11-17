@@ -1,6 +1,6 @@
 # Food Roll Motion overlay
 
-Local review on `feat/30-food-roll-animation`. This replaces the earlier inline
+Integrated on `feat/28-storybook-frontend` after local review. This replaces the earlier inline
 CSS/SVG flight completely. There is one active roll sequence, implemented with
 the already installed `motion` 14.14.0 and imports from `motion/react`.
 Package/lockfile edits adding Motion were present before this change and were
@@ -43,8 +43,8 @@ A ref guard prevents duplicate roll requests throughout the current attempt.
 
 Close/Escape can dismiss the layer while a request is pending. This skips only
 the visual ceremony; the page remains locked until that request settles. Its
-real result then appears on the page. Navigation unmount stops scoped Motion
-playback and ignores late responses from the previous component instance.
+real result then appears on the page. Navigation unmount aborts that request,
+stops scoped Motion playback and ignores late responses from the old instance.
 
 ## Accessibility and style
 
@@ -58,7 +58,9 @@ still waits for the real response.
 The paper/forest/brass theme is retained. A single emblem and star provide the
 ritual mood without particle showers, neon, full-screen flashing, copied game
 imagery or audio. The warm wash peaks at opacity 0.14. FoodCard, backend,
-database, data, API adapter and budget controls are unchanged.
+database, data and FoodCard are unchanged. The client API adapter now supports
+request cancellation and a 15-second timeout while preserving endpoints,
+payloads, response envelopes and existing budget controls.
 
 ## Files and local checks
 
@@ -84,7 +86,11 @@ pending-response Skip, no extra requests, natural completion, slow static wait,
 retry/error/empty/network failure, keyboard focus/Escape, reduced motion and
 375/768/1024/1440px overlay/result bounds. Screenshots were visually inspected.
 This is isolated local verification, not a live backend or full screen-reader
-certification. No new commit/push/PR, merge or deployment is part of this handoff.
+certification. The later storybook request authorizes meaningful commits and a
+review PR; the previous local-only handoff boundary no longer applies.
 
 Final frontend lint/build and all 89 full-frontend regression checks passed with
-the new overlay behavior. Backend, API adapter and FoodCard diffs remain empty.
+the new overlay behavior. Backend and FoodCard diffs remain empty. See
+[storybook QA](STORYBOOK-QA.md) for current restoration checks and build sizes.
+The reference video was not decoded for this follow-up; motion was designed
+from the written sequence. No video or copied game assets are bundled.
