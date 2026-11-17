@@ -1,0 +1,24 @@
+.roll-overlay { width: 96vw; max-width: 96vw; height: 94dvh; max-height: 94dvh; padding: 0; overflow: hidden; }
+.roll-overlay[open] { display: flex; flex-direction: column; }
+.roll-overlay > .dialog-heading { flex-shrink: 0; align-items: center; margin: 0; padding: 20px 24px; border-bottom: 1px solid var(--color-rule); }
+.roll-overlay > .dialog-heading h2 { padding: 0; font-size: 1.8rem; max-width: calc(100% - 200px); }
+.roll-overlay__skip { position: absolute; top: 20px; right: 88px; min-width: 80px; z-index: 2; }
+.roll-overlay__body { flex: 1; min-height: 0; overflow: auto; padding: 24px; display: grid; }
+.roll-overlay__scene { min-width: 0; display: flex; flex-direction: column; }
+.summon-scene { position: relative; flex: 1; min-height: 200px; display: grid; place-items: center; overflow: hidden; background: var(--color-primary); color: #d8bd83; border-radius: var(--radius); }
+.summon-emblem { opacity: 0; }
+.summon-emblem > .icon, .summon-scene--waiting > .icon { width: clamp(100px, 15vw, 180px); height: clamp(100px, 15vw, 180px); stroke-width: .8; }
+.summon-scene--waiting > .icon { opacity: .8; }
+.summon-traveler { display: flex; align-items: center; position: absolute; opacity: 0; }
+.summon-traveler > span { width: clamp(64px, 12vw, 160px); height: 1px; background: currentColor; opacity: .5; }
+.summon-traveler > .icon { width: 26px; height: 26px; }
+.summon-wash { position: absolute; inset: 0; pointer-events: none; opacity: 0; background: #d8bd83; }
+.roll-overlay__caption { text-align: center; padding: 24px 12px 8px; }
+.roll-overlay__caption h2 { margin: 10px 0; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+.roll-overlay__caption > p:last-child { color: var(--color-muted); font-size: .875rem; }
+.roll-overlay__outcome { width: min(680px, 100%); margin: auto; outline: none; }
+.roll-overlay__outcome .roll-result { max-width: none; }
+.roll-overlay__outcome .food-image { max-height: 260px; }
+.roll-overlay__outcome .food-image--empty { height: 180px; }
+.roll-overlay__outcome .food-roll__actions { justify-content: center; }
+@media (max-width: 767px) { .roll-overlay { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; }.roll-overlay > .dialog-heading { padding: 16px; }.roll-overlay > .dialog-heading h2 { font-size: 1.5rem; }.roll-overlay__skip { top: 16px; right: 72px; min-width: 72px; }.roll-overlay__body { padding: 16px; }.roll-overlay__caption { padding-block: 20px 8px; } }
