@@ -14,7 +14,7 @@ npm.cmd test
 npm.cmd run test:fixture
 ```
 
-The last command is optional for Postman; see [API.md](API.md). It binds only to
+The last command is optional for Postman; see [API](api.md). It binds only to
 loopback. Production starts with `npm start`, which opens a database connection
 and is intentionally excluded from offline verification.
 

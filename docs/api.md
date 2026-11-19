@@ -2,7 +2,7 @@
 
 Reference: Backend Brief, 14 November 2026. Development base URL:
 `http://localhost:3000`. All endpoints read the shared foods collection; no API
-writes. See [DEPLOYMENT.md](DEPLOYMENT.md) for configuration.
+writes. See [deployment](deployment.md) for configuration.
 
 ## Compatibility decisions
 

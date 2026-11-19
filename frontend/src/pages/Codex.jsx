@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { motion, useReducedMotion } from 'motion/react'
 import FoodCard from '../components/FoodCard'
 import FoodImage from '../components/FoodImage'
 import Dialog from '../components/Dialog'
@@ -15,6 +16,7 @@ import './Codex.css'
 const meals = { Breakfast: 'Bữa sáng', Lunch: 'Bữa trưa', Dinner: 'Bữa tối', Snack: 'Bữa phụ' }
 
 export default function Codex({ foods }) {
+  const reduced = useReducedMotion()
   const search = useLocationSearch()
   const params = new URLSearchParams(search)
   const [savedQuery, saveQuery] = useSessionState('codex:query', '', text)
@@ -69,7 +71,7 @@ export default function Codex({ foods }) {
     </form>
     <div className="catalog-summary"><p role="status">{visible.length} món trong thực đơn</p>{(query || category || sort !== 'price-asc') && <button type="button" className="text-button" onClick={clearFilters}>Xóa bộ lọc<Icon name="close" /></button>}</div>
     {!visible.length ? <StatusPanel title="Không tìm thấy món">Thử một tên khác hoặc xóa bộ lọc để xem lại thực đơn.</StatusPanel>
-      : <div className="food-grid codex-grid">{visible.map(food => <FoodCard key={food._id} food={food}><button type="button" className="text-button" aria-label={`Chi tiết ${food.name}`} onClick={() => showDetail(food._id)}>Xem chi tiết<Icon name="arrow" /></button></FoodCard>)}</div>}
+      : <motion.div className="food-grid codex-grid" initial={{ opacity: 0, y: reduced ? 0 : 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : .3, ease: 'easeOut' }}>{visible.map(food => <FoodCard key={food._id} food={food}><button type="button" className="text-button" aria-label={`Chi tiết ${food.name}`} onClick={() => showDetail(food._id)}>Xem chi tiết<Icon name="arrow" /></button></FoodCard>)}</motion.div>}
     {detailId && <Dialog title={currentDetail?.name || 'Chi tiết món'} titleId="food-detail-title" onClose={closeDetail} className="food-detail">
       {loading && <LoadingSkeleton kind="detail" title="Đang mở sổ món" />}
       {error && <StatusPanel kind="error" title="Chưa tải được chi tiết" onRetry={() => fetchDetail(detailId)}>{error}</StatusPanel>}

@@ -1,0 +1,73 @@
+:root {
+  /* ── Nền sáng đọc chính: giấy da ấm ─────────────────────────── */
+  --color-background: #f1ead9;
+  --color-paper: #fbf6ea;
+  --color-paper-deep: #f4edda;
+  --color-ink: #2b2820;
+  --color-muted: #6d6553;
+
+  /* ── Vùng tối sâu: tháp đêm / banner / footer ───────────────── */
+  --color-night: #1d2a23;
+  --color-night-deep: #15201a;
+  --color-night-ink: #f2ead8;
+  --color-night-muted: #b9b09a;
+  --color-slate-night: #26333d;
+
+  /* ── Điểm nhấn: rừng, rượu vang, đá phiến, gỗ, đồng cổ ────────── */
+  --color-primary: #2a4a3c;
+  --color-primary-hover: #1c352a;
+  --color-on-primary: #f6f0e0;
+  --color-burgundy: #7f3b3b;
+  --color-wine: #7f3b3b;
+  --color-wine-on-dark: #e3a9a0;
+  --color-brass: #8a5f1f;
+  --color-brass-light: #d8b36a;
+  --color-slate: #435d69;
+  --color-timber: #6f4f38;
+  --color-copper: #a05a2c;
+
+  /* ── Màu kính tranh (dùng rất tiết kiệm, làm chi tiết nhỏ) ───── */
+  --color-glass-ruby: #9c4a3c;
+  --color-glass-gold: #c9a227;
+  --color-glass-blue: #3f6d8e;
+  --color-glass-green: #3e6b4f;
+
+  /* ── Đường kẻ, viền, tint ─────────────────────────────────────── */
+  --color-rule: #d9cdb2;
+  --color-border: #97835f;
+  --color-tint: #eae1cc;
+  --color-slate-tint: #e4ebee;
+  --color-wine-tint: #f3e8e2;
+  --color-timber-tint: #eee3d3;
+  --color-positive: #e8efdc;
+  --color-negative: #f6e8e2;
+  --color-focus: #7f3b3b;
+  --color-focus-on-dark: #e4b96f;
+  --color-overlay: rgb(21 32 26 / 62%);
+
+  /* ── Chữ: Cormorant Garamond (đề mục, có bản tiếng Việt) + Be Vietnam Pro (nội dung) ── */
+  --font-display: 'Cormorant Garamond', 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-heading: 'Cormorant Garamond', 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* ── Khoảng cách theo bước 4px ────────────────────────────────── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ── Bo góc, bóng, nhịp ───────────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --shadow-paper: 0 2px 10px rgb(43 40 32 / 6%), 0 14px 34px rgb(43 40 32 / 7%);
+  --shadow-lift: 0 4px 14px rgb(43 40 32 / 10%), 0 20px 48px rgb(43 40 32 / 12%);
+  --shadow-dialog: 0 24px 80px rgb(21 32 26 / 38%);
+  --duration-feedback: 180ms;
+  --ease-out: cubic-bezier(.22, .61, .21, 1);
+  --content-width: 1200px;
+}
