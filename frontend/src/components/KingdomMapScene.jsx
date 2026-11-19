@@ -40,9 +40,9 @@ export default function KingdomMapScene({ farX, farY, midX, midY }) {
         <Pine x={300} y={120} s={.9} /><Pine x={332} y={104} s={1.05} /><Pine x={268} y={100} s={.75} />
       </g>
       <g>
-        <House x={430} y={592} roof="#7f3b3b" />
-        <House x={516} y={596} w={86} roof="#435d69" />
-        <House x={614} y={590} w={64} roof="#6f4f38" />
+        <House x={430} y={540} roof="#7f3b3b" />
+        <House x={516} y={544} w={86} roof="#435d69" />
+        <House x={614} y={538} w={64} roof="#6f4f38" />
       </g>
       <ellipse cx="300" cy="560" rx="26" ry="6" fill="#2b2820" opacity=".08" />
     </motion.g>
