@@ -15,12 +15,14 @@ guidance and installed package were used directly.
   layer covers the existing page without introducing a route or navigation.
 - One existing getRandomFood(budget) request starts immediately. The endpoint
   stays GET /api/foods/random?maxPrice=..., with the same filters and envelopes.
-- Motion useAnimate drives a scoped sequence: book emblem opacity/scale, one
-  restrained directional star, then a low-opacity warm paper transition. Normal
-  sequence duration is about 2.3 seconds, followed by a short card entrance.
-- AnimatePresence handles scene/result replacement, Motion handles the surface
-  entrance, card opacity/scale and layout positioning. There is no CSS keyframe
-  roll sequence or video layer running underneath it.
+- Premium redesign: the ceremony is now an astronomical-tower ritual on a deep
+  night panel — starfield, two counter-rotating brass rings, a central crest
+  emblem, a single meteor streak, then a low-opacity warm wash before the
+  reveal. Motion `useAnimate` drives the scoped keyframe sequence; normal
+  duration is about 2.5 seconds, followed by a short keyed card entrance.
+- AnimatePresence / keyed motion elements handle scene/result replacement and
+  the card entrance. There is no CSS keyframe roll sequence or video layer
+  running underneath it.
 - The overlay remains open on success until the user closes it or rolls again.
   The unmodified FoodCard renders only the actual API response. Closing keeps
   that result on the underlying Food Roll page.
@@ -33,7 +35,7 @@ pointer or keyboard. It is idempotent and never sends another request.
 1. If the API response is available, Skip removes the scene and reveals that
    real result immediately, bypassing the remaining sequence/entrance delay.
 2. If the API has not responded, Skip stops the moving scene and leaves a static
-   book with Đang tìm món. The existing request continues. Its response then
+   emblem with Đang tìm món. The existing request continues. Its response then
    appears directly; no fake dish or repeated API request is used.
 3. A naturally finished sequence also holds still while waiting for a slow API.
 
@@ -55,9 +57,10 @@ MotionConfig reducedMotion=user and useReducedMotion bypass the spatial sequence
 and delays when requested, including preference changes mid-sequence. Fetching
 still waits for the real response.
 
-The paper/forest/brass theme is retained. A single emblem and star provide the
-ritual mood without particle showers, neon, full-screen flashing, copied game
-imagery or audio. The warm wash peaks at opacity 0.14. FoodCard, backend,
+The parchment/forest/brass theme is retained; the overlay itself is a deep
+night panel (#1d2a23) with brass rings and a crest emblem, providing the ritual
+mood without particle showers, neon, full-screen flashing, copied game imagery
+or audio. The warm wash peaks at low opacity. FoodCard, backend,
 database, data and FoodCard are unchanged. The client API adapter now supports
 request cancellation and a 15-second timeout while preserving endpoints,
 payloads, response envelopes and existing budget controls.

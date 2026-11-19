@@ -1,34 +1,38 @@
 # Storybook frontend follow-up
 
-## Reviewed design plan
+## Reviewed design plan (premium fairy-tale redesign)
 
-Food Decision is a Vietnamese food-choice tool for individuals and small groups.
-The memorable element is a Central European market-town signboard, expressed as
-original SVG Fachwerk buildings on Home. Functional screens stay readable and
-quiet; they are not a collection of castle ornaments or repeated town pictures.
+Food Decision is a Vietnamese food-choice tool for individuals and small groups,
+now set in a Central European fairy-tale kingdom: light parchment reading
+surfaces with deep night zones (page banner, footer, roll overlay). The
+memorable element is the hand-drawn SVG kingdom map on Home — forest, river,
+cobblestone road, market square and four Fachwerk landmarks as original
+code-native SVG with clickable pins and subtle pointer parallax. Functional
+screens stay readable and quiet; they are not a collection of castle ornaments.
 
-Palette: ivory paper #fffcf5, forest #294b3e, wine #7f3b3b, slate blue #435d69,
-timber #71513c, aged brass #866522. Existing ink/contrast tokens are retained.
-Newsreader remains the heading face; Roboto remains the UI/body face, both with
-system fallbacks. Changing fonts again would add little product value.
+Palette (see [tokens.css](tokens.css)): parchment #f1ead9 / paper #fbf6ea,
+night #1d2a23, forest #2a4a3c, wine #7f3b3b, slate #435d69, timber #6f4f38,
+aged brass #8a5f1f with stained-glass accents used only as tiny details.
+Headings use Cormorant Garamond (Vietnamese subset); body/UI uses Be Vietnam
+Pro — both with system fallbacks, `display=swap`.
 
-Layout concept: left-aligned headings and working forms, a town signboard only
-on Home, food-led result panels and a temporary Motion roll modal.
+Layout concept: per-screen night banner with a brass dotted texture and a
+per-destination accent bar, then working forms and food-led result panels; the
+roll is a temporary full-screen night ritual overlay.
 
 ```text
-Home:     [plain heading + four choices] [one Fachwerk town signboard]
-Explore:  [search / category / sort] [real food journal grid] [detail dialog]
-Decide:   [saved preferences or group draft] [ranked/finalist API results]
-Roll:     [budget / saved real result] -> [temporary ritual overlay + Skip]
+Home:     [night banner] [SVG kingdom map + 4 landmark pins (parallax)]
+Explore:  [night banner] [slate filter panel] [editorial journal grid] [detail dialog]
+Decide:   [night banner] [accent form panel] [ranked / finalist API results]
+Roll:     [night intro + brass budget card] -> [full-screen ritual overlay + Skip]
 ```
 
 Self-critique before implementation: the previous numbered destinations implied
-a sequence that does not exist, and repeated tracked uppercase labels plus an
-italic headline fragment felt generic. Remove those treatments, keep the user's
-paper/forest palette, and spend the visual detail on timber architecture. Use
-wine for Oracle, slate for Explore, timber for Group and forest for Roll as small
-structural accents, not whole-page monochrome themes. No invented dishes or art
-URLs. Missing photos use the existing honest fallback.
+a sequence that does not exist, and repeated tracked uppercase labels felt
+generic. Keep one primary button style (forest), spend the visual detail on the
+map and the roll ritual. Use wine for Oracle, slate for Explore, timber for
+Group and forest for Roll as small structural accents, not whole-page themes.
+No invented dishes or art URLs. Missing photos use the existing honest fallback.
 
 ## UX foundation
 
