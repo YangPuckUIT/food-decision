@@ -89,6 +89,7 @@ export default function DecisionPanel({ foods, mode }) {
       </fieldset></form>
       <motion.section layout="position" animate={{ opacity: busy ? .7 : 1 }} transition={{ duration: reduced ? 0 : .16 }} className="decision-results" aria-label={oracle ? 'Kết quả gợi ý' : 'Kết quả nhóm'} aria-live="polite" aria-busy={busy}>
         {restored && result !== null && <p className="restored-note">Kết quả lần trước. Bạn có thể chọn lại.</p>}
+        <motion.div key={busy ? 'busy' : error ? 'error' : result ? inputKey : 'placeholder'} initial={{ opacity: 0, y: reduced ? 0 : 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reduced ? 0 : .22, ease: 'easeOut' }}>
         {busy ? <LoadingSkeleton kind="decision" title={oracle ? 'Đang tìm món hợp khẩu vị' : 'Đang xem điều kiện của nhóm'} />
           : error ? <StatusPanel kind="error" title="Chưa nhận được kết quả" onRetry={() => submit()}>{error}</StatusPanel>
             : result === null ? <div className="decision-placeholder"><Landmark name={mode} /><h2>{oracle ? 'Gợi ý dành cho bạn' : 'Những món vào vòng cuối'}</h2><p>{oracle ? 'Chọn khẩu vị rồi nhấn Gợi ý cho tôi.' : 'Gom món và đặt điều kiện để tìm lựa chọn chung.'}</p></div>
@@ -101,6 +102,7 @@ export default function DecisionPanel({ foods, mode }) {
                 {visibleWinner && <div className="group-winner"><Icon name="check" /><div><p>Cả nhóm ăn</p><h3>{visibleWinner.name}</h3><strong>{formatPrice(visibleWinner.price)}</strong></div></div>}
                 <div className="eliminated-section"><h3>Món đã loại ({result.eliminated.length})</h3>{result.eliminated.length ? <ul className="eliminated-list">{result.eliminated.map(item => <li key={item.food._id}><Icon name="close" /><div><strong>{item.food.name}</strong><p>{reasons[item.reason] || item.reason}</p></div><span>{formatPrice(item.food.price)}</span></li>)}</ul> : <p className="field-hint">Tất cả món đã chọn đều phù hợp.</p>}</div>
               </>}
+        </motion.div>
       </motion.section>
     </div>
   </>
