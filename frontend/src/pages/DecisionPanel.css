@@ -1,18 +1,18 @@
 .decision-layout { display: grid; gap: 32px; align-items: start; }
-.preference-panel { padding: 28px; background: var(--color-paper); border: 1px solid var(--color-rule); border-top: 4px solid var(--section-accent); border-radius: var(--radius-lg); box-shadow: var(--shadow-paper); }
+.preference-panel { min-width: 0; padding: 28px; background: var(--color-paper); border: 1px solid var(--color-rule); border-top: 4px solid var(--section-accent); border-radius: var(--radius-lg); box-shadow: var(--shadow-paper); }
 .preference-panel h2 { font-size: 1.6rem; margin-bottom: 4px; }
 .form-step { display: flex; align-items: center; gap: 12px; }
 .form-step > span { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--section-accent); color: var(--color-on-primary); font-weight: 700; font-size: .95rem; flex: 0 0 auto; }
 .form-step--conditions { margin-top: 8px; }
 .selection-count { min-height: 24px; font-size: .875rem; color: var(--color-muted); }
 .selected-foods { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
-.selected-foods button { display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 6px 8px 6px 14px; border-radius: 999px; background: var(--color-tint); border-color: var(--color-border); font-size: .875rem; font-weight: 500; }
+.selected-foods button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 6px 8px 6px 14px; border-radius: 999px; background: var(--color-tint); border-color: var(--color-border); font-size: .875rem; font-weight: 500; }
 .selected-foods button:hover { border-color: var(--color-wine); color: var(--color-wine); }
 .selected-foods .icon { width: 16px; height: 16px; }
 .candidate-fieldset { border: 0; padding: 0; margin: 0; }
 .candidate-name { flex: 1; min-width: 0; overflow-wrap: anywhere; font-weight: 500; }
 .candidate-price { color: var(--color-muted); font-size: .85rem; font-variant-numeric: tabular-nums; }
-.preference-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.preference-pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .category-choices { border: 0; padding: 0; margin: 0; }
 .category-hint { margin-top: -12px; }
 .check-field { display: flex; align-items: flex-start; gap: 12px; min-height: 44px; padding: 12px 14px; border: 1px solid var(--color-rule); border-radius: var(--radius); background: var(--color-paper); cursor: pointer; }
@@ -26,7 +26,7 @@
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--color-rule); }
 .section-heading p { color: var(--color-muted); font-size: .875rem; }
 .recommendation-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
-.recommendation-list > li { display: grid; grid-template-columns: 96px 1fr; gap: 16px; align-items: start; }
+.recommendation-list > li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; align-items: start; }
 .recommendation-rank { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 16px 8px; background: var(--color-tint); border: 1px solid var(--color-rule); border-radius: var(--radius); text-align: center; }
 .recommendation-rank span { font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--color-muted); }
 .recommendation-rank strong { font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--section-accent); font-variant-numeric: tabular-nums; }
@@ -50,12 +50,13 @@
 .eliminated-list p { font-size: .8rem; color: var(--color-muted); }
 .eliminated-list > span { color: var(--color-muted); font-size: .85rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (min-width: 900px) {
-  .decision-layout { grid-template-columns: minmax(340px, 5fr) 7fr; }
-  .decision-layout--group { grid-template-columns: minmax(380px, 6fr) 6fr; }
+  .decision-layout { grid-template-columns: minmax(340px, 5fr) minmax(0, 7fr); }
+  .decision-layout--group { grid-template-columns: minmax(380px, 6fr) minmax(0, 6fr); }
 }
 @media (max-width: 479px) {
   .preference-panel { padding: 20px; }
   .preference-pair { grid-template-columns: 1fr; }
-  .recommendation-list > li { grid-template-columns: 76px 1fr; gap: 12px; }
+  .recommendation-list > li { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .recommendation-rank { flex-direction: row; justify-content: center; gap: 10px; padding: 12px; }
   .recommendation-rank strong { font-size: 1.6rem; }
 }
