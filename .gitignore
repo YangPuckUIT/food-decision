@@ -1,2 +1,12 @@
 node_modules/
 .env
+.env.*
+!.env.example
+dist/
+coverage/
+*.log
+.DS_Store
+.impeccable/
+.taste-skill/
+test-results/
+playwright-report/
