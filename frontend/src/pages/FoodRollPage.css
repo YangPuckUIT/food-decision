@@ -1,14 +1,20 @@
 .roll-layout { display: grid; gap: 24px; }
-.roll-budget { padding: 32px 24px; background: var(--color-tint); border: 1px solid var(--color-rule); border-radius: var(--radius); }
-.roll-budget > .landmark { width: 112px; height: 112px; margin-bottom: 20px; }
+.roll-budget { padding: 28px 24px; background: var(--color-paper); border: 1px solid var(--color-rule); border-top: 4px solid var(--color-brass); border-radius: var(--radius-lg); box-shadow: var(--shadow-paper); }
+.roll-budget > .landmark { width: 96px; height: 96px; margin-bottom: 18px; color: var(--color-primary); }
 .roll-budget h2 { font-size: 1.5rem; }
-.roll-budget__amount { font-family: var(--font-heading); font-size: 3rem; color: var(--color-primary); margin: 12px 0; font-variant-numeric: tabular-nums; }
+.roll-budget__amount { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--color-primary); margin: 10px 0; font-variant-numeric: tabular-nums; line-height: 1.1; }
 .roll-budget > p:not(.roll-budget__amount) { max-width: 28ch; color: var(--color-muted); font-size: .875rem; }
-.roll-budget > .text-button { margin-top: 16px; }
+.roll-budget > .text-button { margin-top: 14px; }
 .roll-stage { min-width: 0; min-height: 480px; }
-.roll-intro { display: flex; align-items: center; flex-direction: column; text-align: center; justify-content: center; min-height: 360px; padding: 32px 24px; border: 1px solid var(--color-rule); background: var(--color-paper); border-radius: var(--radius); }
-.roll-intro > .icon { color: var(--color-brass); width: 48px; height: 48px; margin-bottom: 28px; }
-.roll-intro > p { color: var(--color-muted); margin: 16px 0 28px; max-width: 34ch; }
+.roll-intro {
+  display: flex; align-items: center; flex-direction: column; text-align: center; justify-content: center;
+  min-height: 360px; padding: 40px 24px; border: 1px solid rgb(216 179 106 / 30%); border-radius: var(--radius-lg);
+  background: radial-gradient(circle at 50% 30%, rgb(63 109 142 / 30%), transparent 65%), var(--color-night);
+  color: var(--color-night-ink); box-shadow: var(--shadow-paper);
+}
+.roll-intro > .icon { color: var(--color-brass-light); width: 52px; height: 52px; margin-bottom: 26px; }
+.roll-intro h2 { color: var(--color-night-ink); }
+.roll-intro > p { color: var(--color-night-muted); margin: 14px 0 28px; max-width: 36ch; }
 .roll-result { max-width: 620px; }
 .result-heading { display: flex; gap: 10px; align-items: center; margin-bottom: 20px; }
 .result-heading > .icon { color: var(--color-primary); }
@@ -18,4 +24,8 @@
 .roll-result__description { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--color-rule); color: var(--color-muted); font-size: .9rem; }
 .food-roll__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 .roll-stage > .roll-intro { min-height: 480px; }
-@media (min-width: 768px) { .roll-layout { grid-template-columns: minmax(240px, .75fr) minmax(0, 1.5fr); gap: 32px; }.roll-budget { align-self: start; }.roll-stage, .roll-stage > .roll-intro { min-height: 520px; } }
+@media (min-width: 768px) {
+  .roll-layout { grid-template-columns: minmax(240px, .75fr) minmax(0, 1.5fr); gap: 32px; }
+  .roll-budget { align-self: start; position: sticky; top: 24px; }
+  .roll-stage, .roll-stage > .roll-intro { min-height: 520px; }
+}
