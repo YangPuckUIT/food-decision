@@ -1,8 +1,33 @@
 export default function Landmark({ name }) {
-  return <svg className="landmark" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-    {name === 'roll' ? <><path d="M25 68V35h30v33M22 35h36l-5-8H27ZM29 27V15l11-9 11 9v12M23 68h34M34 68V54a6 6 0 0 1 12 0v14M35 41h10M40 15v7M51 12l7-7M56 17l10-4" /><path d="m62 25 2-5 2 5 5 2-5 2-2 5-2-5-5-2Z" /></>
-      : name === 'oracle' ? <><path d="M9 63 40 18l31 45H9ZM40 18V8l16 4-16 5M40 24v39M9 63l31-14 31 14M40 49 28 63M40 49l12 14M18 68h44" /><path d="m16 16 2-5 2 5 5 2-5 2-2 5-2-5-5-2ZM65 34l2-4 2 4 4 2-4 2-2 4-2-4-4-2Z" /></>
-        : name === 'group' ? <><path d="M13 40a27 13 0 0 1 54 0v7a27 13 0 0 1-54 0v-7ZM13 40a27 13 0 0 0 54 0M21 53v15M59 53v15M20 67h5M55 67h5M28 21v-8h24v8M19 26l-6-8M61 26l6-8M34 39h12M39 35v8" /><path d="M33 22h14M6 48v12h8M74 48v12h-8" /></>
-          : <><path d="M12 20c12-5 20-3 28 2 8-5 16-7 28-2v43c-12-5-20-3-28 2-8-5-16-7-28-2ZM40 22v43M7 26v41c12-4 23-3 33 2 10-5 21-6 33-2V26M21 29l11 2M21 38l11 2M21 47l11 2M48 31l11-2M48 40l11-2M48 49l11-2M56 9v10l4-3 4 1V7" /></>}
+  return <svg className="landmark" viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+    {name === 'roll' ? <>
+      <path d="M27 70V37h26v33M27 37v-7h6v4h5v-4h4v4h5v-4h6v7" />
+      <path d="M30 30 40 13l10 17" />
+      <path d="M36 70V59a4 4 0 0 1 8 0v11" />
+      <path d="M37 44a3 3 0 0 1 6 0v4h-6Z" />
+      <path d="M40 13V6M40 4l1.2 2.4 2.6.3-2 1.8.6 2.6-2.4-1.4-2.4 1.4.6-2.6-2-1.8 2.6-.3Z" />
+      <path d="M22 70h36" />
+    </>
+      : name === 'oracle' ? <>
+      <path d="M12 68 40 26l28 42Z" />
+      <path d="M33 68l7-17 7 17" />
+      <path d="M40 26V13l11 4-11 5" />
+      <path d="M58 10a6.5 6.5 0 1 1-7.5-7.5A8 8 0 0 0 58 10Z" />
+      <path d="M20 14l1 2.2 2.4.3-1.8 1.6.5 2.4-2.1-1.3-2.2 1.3.6-2.4-1.8-1.6 2.4-.3Z" />
+      <path d="M8 68h64" />
+    </>
+        : name === 'group' ? <>
+      <ellipse cx="40" cy="46" rx="23" ry="11" />
+      <path d="M25 53v13M55 53v13M18 46h-6M68 46h-6" />
+      <circle cx="40" cy="24" r="4.5" /><circle cx="40" cy="68" r="4.5" /><circle cx="12" cy="46" r="4.5" /><circle cx="68" cy="46" r="4.5" />
+      <path d="M33 42v7h7v-7M40 42v-3h5v3M30 42v-3" />
+      <path d="M28 10h24v9H28ZM34 19v5M46 19v5" />
+    </>
+          : <>
+      <path d="M12 22c9-4 18-3 28 2 10-5 19-6 28-2v40c-9-4-18-3-28 2-10-5-19-6-28-2Z" />
+      <path d="M40 24v40" />
+      <path d="M18 30l10 2M18 38l10 2M18 46l10 2M52 32l10-2M52 40l10-2M52 48l10-2" />
+      <path d="M52 20v18l4.5-4 4.5 4V22" />
+    </>}
   </svg>
 }
