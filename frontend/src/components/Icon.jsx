@@ -15,6 +15,8 @@ const paths = {
   warning: <><path d="m12 3 10 18H2ZM12 9v5M12 17v.5" /></>,
   refresh: <><path d="M20 9a8 8 0 0 0-14-4L3 8m0-5v5h5M4 15a8 8 0 0 0 14 4l3-3m0 5v-5h-5" /></>,
   flame: <path d="M12 2c1 5-4 6-2 10 2-1 3-3 3-5 5 4 7 7 5 11a7 7 0 0 1-12-1C3 11 8 7 12 2Z" />,
+  crest: <><path d="M12 2.5 20 5v6c0 5-3.4 8.6-8 10.5C7.4 19.6 4 16 4 11V5Z" /><path d="m12 7 1.4 3 3.1.3-2.4 2.1.7 3-2.8-1.6-2.8 1.6.7-3-2.4-2.1 3.1-.3Z" /></>,
+  moon: <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z" />,
 }
 
 export default function Icon({ name, className = '', ...props }) {
