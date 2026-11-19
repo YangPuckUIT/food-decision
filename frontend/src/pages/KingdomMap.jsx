@@ -49,7 +49,7 @@ export default function KingdomMap({ onNavigate }) {
           {destinations.map(({ key, title, action, description }, index) => {
             const spot = SPOTS[key]
             return <motion.button type="button" key={key} className={`destination destination--${key}`}
-              style={{ left: `${spot.x}%`, top: `${spot.y}%`, x: reduced ? 0 : pinX, y: reduced ? 0 : pinY }}
+              style={{ '--spot-x': `${spot.x}%`, '--spot-y': `${spot.y}%`, x: reduced ? 0 : pinX, y: reduced ? 0 : pinY }}
               initial={{ opacity: 0, y: reduced ? 0 : 18, scale: reduced ? 1 : .88 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={reduced ? { duration: 0 } : { delay: .3 + index * .1, type: 'spring', stiffness: 300, damping: 22 }}
