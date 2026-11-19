@@ -29,7 +29,7 @@ let browser;
     if (!path.startsWith('/api/')) return route.continue();
     const body=req.method()==='POST'?req.postDataJSON():undefined;
     sent.push({path,method:req.method(),query:url.search,body});
-    await sleep(180);
+    await sleep(400);
     let data;let status=200;
     const error=(code,message,http=503)=>{status=http;return {error:{code,message}}};
     if(path==='/api/foods') data=state.catalog==='error'?error('TEMPORARY','Không tải được thực đơn thử nghiệm.'): {data:state.catalog==='empty'?[]:foods};
@@ -58,6 +58,7 @@ let browser;
   await screenshot('home-1440');
 
   await nav('Khám phá');
+  await page.getByText('Đang tải thực đơn',{exact:true}).waitFor();
   check('Catalog loading is visible',await page.getByText('Đang tải thực đơn',{exact:true}).isVisible());
   await waitCatalog();
   check('Catalog comes from intercepted API',await page.locator('.codex-grid .food-card').count()===foods.length);
@@ -187,12 +188,19 @@ let browser;
   await page.getByText('Thực đơn đang được cập nhật',{exact:true}).waitFor();check('Empty catalog handled');
   state.catalog='ok';await page.getByRole('button',{name:'Thử lại',exact:true}).click();await waitCatalog();
 
-  for(const width of [375,768,1024,1440]) {
+  const widths = [320,375,390,768,820,1024,1440];
+  for(const width of widths) {
     await page.setViewportSize({width,height:1000});
     await nav('Bản đồ');await noOverflow(`Home no overflow at ${width}`);await screenshot(`home-${width}`);
+    check(`Map labels stay inside frame and do not overlap at ${width}`,await page.locator('.map-frame').evaluate(frame=>{
+      const bounds=frame.getBoundingClientRect();
+      const cards=[...frame.querySelectorAll('.destination__card')].map(card=>card.getBoundingClientRect());
+      return cards.every((r,i)=>r.left>=bounds.left&&r.right<=bounds.right&&r.top>=bounds.top&&r.bottom<=bounds.bottom&&cards.slice(i+1).every(other=>r.right<=other.left||other.right<=r.left||r.bottom<=other.top||other.bottom<=r.top));
+    }));
     await nav('Food Roll');if(await page.getByRole('button',{name:'Chọn ngân sách và roll',exact:true}).isVisible()) await page.getByRole('button',{name:'Chọn ngân sách và roll',exact:true}).click();else await page.getByRole('button',{name:'Đổi ngân sách',exact:true}).first().click();
     await noOverflow(`Budget no document overflow at ${width}`);
     check(`Budget no internal overflow at ${width}`,await page.getByRole('dialog').evaluate(d=>d.scrollWidth<=d.clientWidth));
+    check(`Budget presets fit their buttons at ${width}`,await page.locator('.budget-panel__presets button').evaluateAll(nodes=>nodes.every(n=>n.scrollWidth<=n.clientWidth)));
     await screenshot(`budget-${width}`);await page.getByRole('button',{name:'Gọi sao băng',exact:true}).click();
     await page.locator('.roll-result .food-card').waitFor();await noOverflow(`Roll result no overflow at ${width}`);await screenshot(`roll-${width}`);await page.getByRole('button',{name:'Đóng kết quả',exact:true}).click();
     await nav('Khám phá');await waitCatalog();await noOverflow(`Catalog no overflow at ${width}`);await screenshot(`codex-${width}`);
@@ -234,7 +242,7 @@ let browser;
   await page.locator('.roll-result .food-card').waitFor();
   check('No runtime page errors',errors.length===0);
   check('Only existing frontend endpoints requested',sent.every(r=>['/api/foods','/api/foods/random','/api/recommendations','/api/group-decision'].includes(r.path)||/^\/api\/foods\/[a-f0-9]{24}$/.test(r.path)));
-  fs.writeFileSync(out+'/report.json',JSON.stringify({checks,passed,pageErrors:errors,requests:sent.length,widths:[375,768,1024,1440],mode:'Browser interception; local fixtures only; no live backend or Atlas'},null,2));
+  fs.writeFileSync(out+'/report.json',JSON.stringify({checks,passed,pageErrors:errors,requests:sent.length,widths,mode:'Browser interception; local fixtures only; no live backend or Atlas'},null,2));
   console.log(JSON.stringify({checks,pageErrors:errors,requests:sent.length,screenshots:out},null,2));
   await browser.close();
 })().catch(async e=>{console.error(e);await browser?.close();process.exitCode=1});
