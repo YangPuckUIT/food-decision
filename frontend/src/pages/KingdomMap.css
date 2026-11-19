@@ -1,19 +1,53 @@
-.town-layout { display: grid; gap: 32px; align-items: center; }
-.home-heading { margin: 0 0 28px; }
-.home-heading h1 { font-size: clamp(2.8rem, 5vw, 4.7rem); line-height: 1.12; max-width: 100%; text-wrap: balance; }
-.home-heading p { margin-top: 20px; color: var(--color-muted); max-width: 42ch; }
-.kingdom-map { border-top: 1px solid var(--color-rule); }
-.destinations { display: grid; }
-.destination { display: grid; grid-template-columns: 44px 1fr; column-gap: 16px; padding: 20px 0; min-width: 0; text-align: left; border: 0; border-bottom: 1px solid var(--color-rule); border-radius: 0; background: transparent; }
-.destination:hover:not(:disabled) { background: var(--color-paper); }
-.landmark { width: 64px; height: 64px; color: var(--color-primary); }
-.destination > .landmark { grid-column: 1; grid-row: 1 / 4; width: 44px; height: 44px; align-self: center; }
-.destination__title { grid-column: 2; font-family: var(--font-heading); font-size: 1.55rem; line-height: 1.2; }
-.destination__action { grid-column: 2; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 4px; color: var(--color-primary); font-size: .85rem; font-weight: 500; }
-.destination__action > .icon { width: 18px; height: 18px; }
-.destination__description { grid-column: 2; color: var(--color-muted); margin-top: 4px; font-size: .85rem; }
-.town-picture { padding: 16px; background: var(--color-paper); border-radius: 48% 48% 4px 4px; border: 1px solid var(--color-rule); }
-.town-signboard { display: block; width: 100%; height: auto; }
-.town-picture > p { text-align: center; color: var(--color-timber); font-family: var(--font-heading); font-size: 1.7rem; margin: -16px 0 20px; }
-@media (min-width: 768px) { .town-layout { grid-template-columns: minmax(280px, .9fr) minmax(0, 1.1fr); gap: 48px; }.town-picture { align-self: center; position: sticky; top: 24px; } }
-@media (max-width: 767px) { .town-picture { grid-row: 1; padding: 0 12px; }.town-signboard { max-height: 180px; }.town-picture > p { margin-bottom: 16px; font-size: 1.25rem; }.home-heading h1 { max-width: none; }.town-layout { gap: 28px; } }
+.home-heading { margin: 0 0 30px; }
+.home-heading h1 { font-size: clamp(2.8rem, 5.4vw, 4.6rem); line-height: 1.08; max-width: 16ch; text-wrap: balance; font-weight: 700; }
+.home-heading p { margin-top: 18px; color: var(--color-muted); max-width: 52ch; font-size: 1.02rem; }
+
+.kingdom-map { min-width: 0; }
+.map-frame { position: relative; border: 1px solid var(--color-rule); border-radius: var(--radius-lg); overflow: hidden; background: var(--color-paper); box-shadow: var(--shadow-lift); }
+.map-scene { line-height: 0; }
+.map-svg { display: block; width: 100%; height: auto; }
+
+/* Các điểm đến đặt trên bản đồ (desktop) */
+.destinations { position: absolute; inset: 0; }
+.destination { position: absolute; display: flex; align-items: flex-start; min-height: 44px; padding: 0; text-align: left; background: transparent; border: 0; border-radius: var(--radius); }
+.destination:hover:not(:disabled) { background: transparent; }
+.destination__pin {
+  position: absolute; left: 0; top: 0; transform: translate(-50%, -50%);
+  display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%;
+  background: var(--color-night); color: var(--color-brass-light);
+  border: 2px solid var(--color-brass-light); box-shadow: var(--shadow-paper);
+  transition: transform var(--duration-feedback) var(--ease-out), border-color var(--duration-feedback), background-color var(--duration-feedback);
+}
+.destination__pin .landmark { width: 34px; height: 34px; }
+.destination:hover .destination__pin, .destination:focus-visible .destination__pin { transform: translate(-50%, -50%) scale(1.08); border-color: var(--color-glass-gold); background: var(--color-night-deep); }
+.destination:focus-visible { outline: none; }
+.destination:focus-visible .destination__pin { outline: 3px solid var(--color-focus); outline-offset: 3px; }
+.destination__card {
+  display: grid; gap: 2px; margin-left: 36px; padding: 12px 16px; max-width: 250px;
+  background: var(--color-paper); border: 1px solid var(--color-rule); border-radius: var(--radius);
+  box-shadow: var(--shadow-paper);
+  transition: transform var(--duration-feedback) var(--ease-out), box-shadow var(--duration-feedback) var(--ease-out), border-color var(--duration-feedback);
+}
+.destination:hover .destination__card, .destination:focus-visible .destination__card { transform: translateY(-2px); box-shadow: var(--shadow-lift); border-color: var(--color-brass); }
+.destination__title { font-family: var(--font-display); font-weight: 700; font-size: 1.35rem; line-height: 1.15; color: var(--color-ink); }
+.destination__action { display: flex; align-items: center; gap: 6px; font-size: .82rem; font-weight: 600; color: var(--color-primary); }
+.destination__action > .icon { width: 15px; height: 15px; }
+.destination--oracle .destination__action { color: var(--color-wine); }
+.destination--group .destination__action { color: var(--color-timber); }
+.destination--codex .destination__action { color: var(--color-slate); }
+.destination__description { color: var(--color-muted); font-size: .8rem; line-height: 1.45; }
+
+/* Điện thoại: bản đồ ở trên, danh sách điểm đến bên dưới theo thứ tự đọc */
+@media (max-width: 767px) {
+  .home-heading { margin-bottom: 22px; }
+  .home-heading h1 { max-width: none; }
+  .map-frame { box-shadow: var(--shadow-paper); }
+  .destinations { position: static; display: grid; gap: 10px; padding: 14px; }
+  .destination { position: static; align-items: center; gap: 12px; width: 100%; padding: 8px; border-radius: var(--radius); }
+  .destination:hover:not(:disabled) { background: var(--color-tint); }
+  .destination__pin { position: static; transform: none; flex: 0 0 52px; width: 52px; height: 52px; }
+  .destination:hover .destination__pin, .destination:focus-visible .destination__pin { transform: none; }
+  .destination__card { flex: 1; margin-left: 0; max-width: none; padding: 10px 12px; box-shadow: none; }
+  .destination:hover .destination__card, .destination:focus-visible .destination__card { transform: none; box-shadow: none; }
+  .destination__title { font-size: 1.2rem; }
+}
