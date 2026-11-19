@@ -1,4 +1,4 @@
-/* ── Màu nhấn theo từng vùng của vương quốc ── */
+/* Theme accents, page headings and shared loading states. */
 .kingdom { --section-accent: var(--color-primary); }
 .kingdom--codex { --section-accent: var(--color-slate); }
 .kingdom--oracle { --section-accent: var(--color-wine); }
@@ -22,7 +22,7 @@
   content: ''; position: absolute; right: 58px; bottom: -4px; width: 72px; height: 72px;
   border: 1.5px solid rgb(216 179 106 / 22%); border-radius: 50%; pointer-events: none;
 }
-.page-heading h1 { max-width: 22ch; font-size: clamp(2.3rem, 4.6vw, 3.7rem); font-weight: 700; color: var(--color-night-ink); text-wrap: balance; }
+.page-heading h1 { max-width: 24ch; font-size: clamp(2rem, 3.6vw, 3rem); font-weight: 700; color: var(--color-night-ink); text-wrap: balance; }
 .page-heading :focus-visible { outline-color: var(--color-focus-on-dark); }
 .page-trail { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; margin-bottom: 24px; }
 .page-trail .back-link { margin: 0; color: var(--color-brass-light); }
