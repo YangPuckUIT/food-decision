@@ -5,8 +5,8 @@ import Workspace from './pages/Workspace'
 import Icon from './components/Icon'
 import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'motion/react'
 import { useLocationSearch, modeFromSearch, updateRoute } from './state/navigation'
-import './MvpApp.css'
-import './storybook.css'
+import './styles/shell.css'
+import './styles/theme.css'
 
 const tabs = [
   ['home', 'map', 'Bản đồ'], ['roll', 'star', 'Food Roll'], ['oracle', 'oracle', 'Gợi ý'],
