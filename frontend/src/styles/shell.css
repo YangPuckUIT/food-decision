@@ -1,3 +1,4 @@
+/* Shared application shell, navigation and forms. */
 .kingdom { min-height: 100dvh; display: flex; flex-direction: column; }
 .page-container, .workspace { width: min(var(--content-width), calc(100% - 40px)); margin: 0 auto; padding: 32px 0 56px; flex: 1; }
 
@@ -26,8 +27,9 @@
 .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr)); gap: 24px; margin: 24px 0; }
 .food-grid > * { min-width: 0; display: flex; }
 .food-grid .food-card { flex: 1; }
-.filters { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; margin-bottom: 24px; padding: 24px; background: var(--color-paper); border: 1px solid var(--color-rule); border-radius: var(--radius-lg); box-shadow: var(--shadow-paper); }
+.filters { display: grid; grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 24px; padding: 24px; background: var(--color-paper); border: 1px solid var(--color-rule); border-radius: var(--radius-lg); box-shadow: var(--shadow-paper); }
 .filters label, .field { display: flex; flex-direction: column; gap: 8px; font-size: .875rem; font-weight: 600; }
+.filters label, .field { min-width: 0; }
 .choice-row { display: flex; flex-wrap: wrap; gap: 8px; }
 .choice-row label { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px solid var(--color-border); border-radius: 999px; cursor: pointer; background: var(--color-paper); font-size: .875rem; font-weight: 500; transition: background-color var(--duration-feedback), border-color var(--duration-feedback), color var(--duration-feedback); }
 .choice-row label:hover { border-color: var(--color-timber); }
@@ -44,7 +46,8 @@
 @media (max-width: 767px) {
   .site-header__inner { justify-content: center; gap: 10px; padding: 12px 0 8px; }
   .site-header nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); width: 100%; gap: 4px; }
-  .site-header nav button { flex-direction: column; gap: 4px; padding: 10px 2px; font-size: .72rem; }
+  .site-header nav button { flex-direction: column; gap: 4px; padding: 10px 2px; font-size: .72rem; border-radius: var(--radius); }
+  .site-header nav button span { font-size: clamp(.625rem, 2.85vw, .72rem); }
   .filters { grid-template-columns: 1fr 1fr; padding: 16px; }
   .filters label:first-child { grid-column: 1 / -1; }
 }
