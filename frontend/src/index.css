@@ -18,12 +18,14 @@ button, a, input, select { transition: background-color var(--duration-feedback)
 :focus-visible { outline: 3px solid var(--color-focus); outline-offset: 3px; border-radius: var(--radius-sm); }
 h1, h2, h3, p { margin: 0; overflow-wrap: anywhere; }
 h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; line-height: 1.12; letter-spacing: .005em; }
-h1 { font-size: clamp(2.6rem, 5.2vw, 4.4rem); font-weight: 700; }
-h2 { font-size: clamp(1.75rem, 3vw, 2.3rem); }
-h3 { font-size: 1.45rem; }
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 700; }
+h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); }
+h3 { font-size: 1.35rem; }
 fieldset { min-width: 0; margin: 0; }
 img, svg { max-width: 100%; }
 button { min-height: 44px; border: 1px solid var(--color-border); border-radius: var(--radius); background: var(--color-paper); padding: 10px 18px; }
+button, input, select { min-width: 0; }
+button, label, legend { overflow-wrap: anywhere; }
 button:hover:not(:disabled) { background: var(--color-tint); }
 button:active:not(:disabled) { transform: translateY(1px); }
 input:not([type=checkbox]):not([type=range]), select {
@@ -61,7 +63,8 @@ input[type=range] { accent-color: var(--color-primary); min-height: 44px; }
 }
 .dialog::backdrop { background: var(--color-overlay); backdrop-filter: blur(2px); }
 .dialog-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--color-rule); }
-.dialog-heading h2 { padding-top: 4px; font-size: 2rem; }
+.dialog-heading h2 { min-width: 0; padding-top: 4px; font-size: clamp(1.5rem, 3vw, 1.8rem); }
+.dialog-heading > .icon-button { flex: 0 0 44px; }
 
 /* ── Bảng trạng thái: rỗng / lỗi / loading ── */
 .status-panel { display: flex; align-items: flex-start; gap: 16px; padding: 28px; border: 1px solid var(--color-rule); border-left: 4px solid var(--color-brass); background: var(--color-paper); border-radius: var(--radius); box-shadow: var(--shadow-paper); }
@@ -69,6 +72,7 @@ input[type=range] { accent-color: var(--color-primary); min-height: 44px; }
 .status-panel h2 { font-size: 1.5rem; }
 .status-panel__description { color: var(--color-muted); margin-top: 10px; }
 .status-panel .button { margin-top: 20px; }
+.status-panel > div { min-width: 0; }
 .status-panel--error { border-color: var(--color-wine); border-left-color: var(--color-wine); background: var(--color-negative); }
 .status-panel--error > .icon { color: var(--color-wine); }
 .is-loading { animation: loading-turn 1.2s linear infinite; }
